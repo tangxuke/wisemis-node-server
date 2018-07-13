@@ -23,15 +23,46 @@ router.get('/',function(req,res,next){
 
 //添加菜单
 router.post('/add',(req,res,next)=>{
-    console.log(req.body)
-    var menu=new Menu(req.body)
-    menu.save().then(()=>{
-        response.success=true
-    }).catch((err)=>{
-        response.message=err.message
-    }).then(()=>{
-        res.json(response)
-    })
+    console.log(req.body);
+    
+    var parent=req.body.parent;
+    if(parent){
+        Menu.findOne({name:parent},(err,doc)=>{
+            if(err){
+                response.message=err.message;
+            }else{
+                doc.children.push({
+                    name:req.body.name,
+                    title:req.body.title,
+                    icon:req.body.icon,
+                    path:req.body.path
+                });
+                doc.save().then(()=>{
+                    response.success=true;
+                }).catch((err)=>{
+                    response.message=err.message;
+                }).then(()=>{
+                    res.json(response);
+                })
+            }
+        })
+
+    }else{
+        var menu=new Menu({
+            name:req.body.name,
+            title:req.body.title,
+            icon:req.body.icon,
+            path:req.body.path
+        })
+        menu.save().then(()=>{
+            response.success=true
+        }).catch((err)=>{
+            response.message=err.message
+        }).then(()=>{
+            res.json(response)
+        })
+    }
+    
 })
 
 module.exports=router
