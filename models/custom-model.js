@@ -2,7 +2,6 @@ var mongoose=require('mongoose')
 var TheModel=require('./model')
 
 module.exports=function(modelName){
-    var p=new Promise((resolve, reject)=>{
         var theSchama=new mongoose.Schema();
         //读取模板
         TheModel.findOne({'name':modelName})
@@ -10,14 +9,13 @@ module.exports=function(modelName){
             if(doc){
                 //生成架构
                 theSchama.add(doc.schama);
-                resolve(mongoose.model(doc.name,theSchama,doc.collname));
+
+                //resolve(mongoose.model(doc.name,theSchama,doc.collname));
+                return mongoose.model(doc.name,doc.schama,doc.collname);
             }else{
-                reject(new Error('模板不存在！'));
+                return new Error('模板不存在')
             }
         }).catch((err)=>{
-            reject(err);
+            return err
         });
-    });
-    
-    return p;
 }

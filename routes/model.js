@@ -2,7 +2,7 @@
 var express=require('express');
 var router=express.Router();
 var CustomModel=require('./../models/model');
-var GetModel=require('./../models/get-model');
+
 
 /**
  * 获取模型列表
