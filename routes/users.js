@@ -2,20 +2,26 @@ var express = require('express');
 var router = express.Router();
 var User=require('./../models/user')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.get('/about',function(req,res,next){
-  res.send({'test':'hello'});
-})
 
 var response={
   success:false,
   message:'',
   result:[]
 }
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  User.find({},'username').sort({'username':'asc'}).then((docs)=>{
+    response.success=true;
+    response.message='';
+    response.result=docs;
+  }).catch((err)=>{
+    response.success=false;
+    response.message=err.message;
+  }).then(()=>{
+    res.json(response);
+  })
+});
 
 router.post('/add',function(req,res,next){
   
@@ -41,6 +47,20 @@ router.post('/add',function(req,res,next){
       response.message=err.message;
       res.json(response);
     })
+})
+
+//修改密码（管理员）,参数：用户名，新密码
+router.post('/change-pass-admin',(req,res,next)=>{
+  response.success=false;
+  response.message='功能尚未实现';
+  res.json(response);
+})
+
+//修改密码（用户），参数：用户名，旧密码，新密码
+router.post('/change-pass',(req,res,next)=>{
+  response.success=false;
+  response.message='功能尚未实现';
+  res.json(response);
 })
 
 module.exports = router;
