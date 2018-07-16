@@ -5,13 +5,74 @@ var router=express.Router();
 
 var GetModel=require('./../models/custom-model');
 
-var CustomModel;
+//删除记录
+router.post('/:model/del',(req,res,next)=>{
+    var p=GetModel(req.params.model);
+
+    p.then((value)=>{
+        value.deleteOne({'_id':req.body._id})
+            .then((doc)=>{
+                res.json({
+                    success:true,
+                    message:'',
+                    result:doc
+                })
+            })
+            .catch((err)=>{
+                res.json({
+                    success:false,
+                    message:err.message,
+                    result:null
+                })
+            })
+    })
+    .catch((error)=>{
+        res.json({
+            success:false,
+            message:error.message,
+            result:null
+        })
+    })
+    
+})
+
+//修改记录
+router.post('/:model/edit',(req,res,next)=>{
+    var p=GetModel(req.params.model);
+
+    p.then((value)=>{
+        value.updateOne({'_id':req.body._id},req.body.data)
+            .then((doc)=>{
+                res.json({
+                    success:true,
+                    message:'',
+                    result:doc
+                })
+            })
+            .catch((err)=>{
+                res.json({
+                    success:false,
+                    message:err.message,
+                    result:null
+                })
+            })
+    })
+    .catch((error)=>{
+        res.json({
+            success:false,
+            message:error.message,
+            result:null
+        })
+    })
+    
+})
+
 //新建记录
 router.post('/:model/new',(req,res,next)=>{
     var p=GetModel(req.params.model);
 
     p.then((value)=>{
-        value.create(req.body)
+        value.create(req.body.data)
             .then((doc)=>{
                 res.json({
                     success:true,
