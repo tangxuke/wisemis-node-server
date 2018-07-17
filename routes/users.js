@@ -24,7 +24,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/add',function(req,res,next){
-  
   User.findOne({'username':req.body.username})
     .then((doc)=>{
       if(doc){
@@ -51,16 +50,80 @@ router.post('/add',function(req,res,next){
 
 //修改密码（管理员）,参数：用户名，新密码
 router.post('/change-pass-admin',(req,res,next)=>{
-  response.success=false;
-  response.message='功能尚未实现';
-  res.json(response);
+  User.findOneAndUpdate({'username':req.body.username},{'password':req.body.password})
+      .then((doc)=>{
+        if(doc){
+          res.json({
+            success:true,
+            message:'',
+            result:null
+          })
+        }else{
+          res.json({
+            success:false,
+            message:'用户不存在！',
+            result:null
+          })
+        }
+      }).catch((error)=>{
+        res.json({
+            success:false,
+            message:error.message,
+            result:null
+          })
+      })
 })
 
 //修改密码（用户），参数：用户名，旧密码，新密码
 router.post('/change-pass',(req,res,next)=>{
-  response.success=false;
-  response.message='功能尚未实现';
-  res.json(response);
+  User.findOneAndUpdate({'username':req.body.username,'password':req.body.password},{'password':req.body['new-password']})
+      .then((doc)=>{
+        if(doc){
+          res.json({
+            success:true,
+            message:'',
+            result:null
+          })
+        }else{
+          res.json({
+            success:false,
+            message:'用户不存在或者旧密码错误！',
+            result:null
+          })
+        }
+      }).catch((error)=>{
+        res.json({
+            success:false,
+            message:error.message,
+            result:null
+          })
+      })
+})
+
+//删除用户
+router.post('/del-user',(req,res,next)=>{
+  User.findOneAndRemove({'username':req.body.username})
+    .then((doc)=>{
+      if(doc){
+        res.json({
+            success:true,
+            message:'',
+            result:null
+          })
+      }else{
+        res.json({
+            success:false,
+            message:'用户不存在！',
+            result:null
+          })
+      }
+    }).catch((error)=>{
+      res.json({
+            success:false,
+            message:error.message,
+            result:null
+          })
+    })
 })
 
 module.exports = router;

@@ -100,6 +100,38 @@ router.post('/edit',(req,res,next)=>{
         })
 })
 
+//删除架构（同时删除集合）
+router.post('/del',(req,res,next)=>{
+    var getModel=require('./../models/custom-model')
+    getModel(req.body.name).then((model)=>{
+        //删除集合
+        model.collection.drop((err)=>{});      
+    })
+    //删除模板
+    CustomModel.findOneAndRemove({name:req.body.name})
+    .then((doc)=>{
+        if(doc){
+            res.json({
+                success:true,
+                message:'',
+                result:null
+            })
+        }else{
+            res.json({
+                success:false,
+                message:'模型不存在！',
+                result:null
+            })
+        }
+    }).catch((err)=>{
+        res.json({
+            success:false,
+            message:error.message,
+            result:null
+        })
+    })
+})
+
 
 //导出路由
 module.exports=router;
