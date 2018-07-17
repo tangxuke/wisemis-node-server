@@ -23,6 +23,17 @@ router.get('/', function(req, res, next) {
   })
 });
 
+//登录
+router.post('/login',(req,res,next)=>{
+
+})
+
+//注销
+router.post('/logout',(req,res.next)=>{
+  
+})
+
+//添加用户
 router.post('/add',function(req,res,next){
   User.findOne({'username':req.body.username})
     .then((doc)=>{
