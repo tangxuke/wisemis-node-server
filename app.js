@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session=require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,6 +24,13 @@ app.use(function(req,res,next){
   res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type');
   next();
 });
+
+//使用session中间件
+app.use(
+  session({
+    
+  })
+)
 
 //连接MongoDB数据库
 var mongoose = require('mongoose');
