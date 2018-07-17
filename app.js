@@ -26,11 +26,7 @@ app.use(function(req,res,next){
 });
 
 //使用session中间件
-app.use(
-  session({
-    
-  })
-)
+
 
 //连接MongoDB数据库
 var mongoose = require('mongoose');

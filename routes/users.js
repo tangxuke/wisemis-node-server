@@ -25,12 +25,37 @@ router.get('/', function(req, res, next) {
 
 //登录
 router.post('/login',(req,res,next)=>{
-
+  User.findOne({username:req.body.username,password:req.body.password})
+    .then((doc)=>{
+      if(doc){
+        res.json({
+          success:true,
+          message:'',
+          result:null
+        })
+      }else{
+        res.json({
+          success:false,
+          message:'用户不存在或密码错误！',
+          result:null
+        })
+      }
+    }).catch((error)=>{
+      res.json({
+          success:false,
+          message:error.message,
+          result:null
+        })
+    })
 })
 
 //注销
 router.post('/logout',(req,res,next)=>{
-  
+  res.json({
+    success:true,
+    message:'',
+    result:null
+  })
 })
 
 //添加用户
