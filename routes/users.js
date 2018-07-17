@@ -51,6 +51,7 @@ router.post('/login',(req,res,next)=>{
 
 //注销
 router.post('/logout',(req,res,next)=>{
+  console.log(`SessionID:${req.sessionID}`)
   res.json({
     success:true,
     message:'',

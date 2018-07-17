@@ -13,6 +13,18 @@ var customModelRouter=require('./routes/custom-model')
 
 var app = express();
 
+//使用session中间件
+//session
+app.use(session({
+	secret: 'asdfjklk#$%^&*()$%^&*',
+	cookie: {maxAge: 1000 * 60 * 30},
+	//每次更新
+	resave: true,
+	//强制保存未初始化的session
+	saveUninitialized: true
+}));
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -25,7 +37,7 @@ app.use(function(req,res,next){
   next();
 });
 
-//使用session中间件
+
 
 
 //连接MongoDB数据库
