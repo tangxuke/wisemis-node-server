@@ -25,6 +25,8 @@ app.use(session({
 }));
 
 
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -37,6 +39,20 @@ app.use(function(req,res,next){
   next();
 });
 
+//全局登录拦截
+app.use((req,res,next)=>{
+  if(req.session.username)
+    next()
+  else{
+    if(req.originalUrl=='/users/login' || req.originalUrl=='/users/logout')
+      next()
+    else{
+      res.json({
+        want_login:true
+      })
+    }
+  }
+})
 
 
 
@@ -52,26 +68,6 @@ mongoose.connection.on("error", function () {
 mongoose.connection.on("disconnected", function () {
   console.log("MongoDB connected disconnected.")
 });
-
-//get user session
-var getSession=(req,res)=>{
-  res.json({
-    session:true  //提供前端验证session存在与否
-  })
-}
-
-//delete user session
-var delSession=(req,res)=>{
-  req.session.username=null
-  res.json({
-    success:true,
-    message:'注销成功',
-    result:null
-  })
-}
-
-var checkLogin=require('./middlewares/checkLogin').checkLogin;
-var checkNotLogin=require('./middlewares/checkLogin').checkNotLogin;
 
 app.use(logger('dev'));
 app.use(express.json());
