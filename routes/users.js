@@ -1,12 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var User=require('./../models/user')
+var sha1=require('sha1')
+
 
 
 var response={
   success:false,
   message:'',
-  result:[]
+  result:null
 }
 
 /* GET users listing. */
@@ -25,9 +27,14 @@ router.get('/', function(req, res, next) {
 
 //登录
 router.post('/login',(req,res,next)=>{
+  req.body.password=sha1(req.body.password)
+  console.log(req.body)
   User.findOne({username:req.body.username,password:req.body.password})
     .then((doc)=>{
       if(doc){
+        //用户信息写入session
+        req.session.username=doc.username
+        
         res.json({
           success:true,
           message:'',
@@ -51,7 +58,7 @@ router.post('/login',(req,res,next)=>{
 
 //注销
 router.post('/logout',(req,res,next)=>{
-  console.log(`SessionID:${req.sessionID}`)
+  req.session.username=null
   res.json({
     success:true,
     message:'',
@@ -61,6 +68,7 @@ router.post('/logout',(req,res,next)=>{
 
 //添加用户
 router.post('/add',function(req,res,next){
+  req.body.password=sha1(req.body.password)
   User.findOne({'username':req.body.username})
     .then((doc)=>{
       if(doc){
@@ -87,6 +95,7 @@ router.post('/add',function(req,res,next){
 
 //修改密码（管理员）,参数：用户名，新密码
 router.post('/change-pass-admin',(req,res,next)=>{
+  req.body.password=sha1(req.body.password)
   User.findOneAndUpdate({'username':req.body.username},{'password':req.body.password})
       .then((doc)=>{
         if(doc){
@@ -113,6 +122,8 @@ router.post('/change-pass-admin',(req,res,next)=>{
 
 //修改密码（用户），参数：用户名，旧密码，新密码
 router.post('/change-pass',(req,res,next)=>{
+  req.body.password=sha1(req.body.password)
+  req.body['new-password']=sha1(req.body['new-password'])
   User.findOneAndUpdate({'username':req.body.username,'password':req.body.password},{'password':req.body['new-password']})
       .then((doc)=>{
         if(doc){

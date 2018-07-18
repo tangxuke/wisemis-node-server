@@ -53,6 +53,26 @@ mongoose.connection.on("disconnected", function () {
   console.log("MongoDB connected disconnected.")
 });
 
+//get user session
+var getSession=(req,res)=>{
+  res.json({
+    session:true  //提供前端验证session存在与否
+  })
+}
+
+//delete user session
+var delSession=(req,res)=>{
+  req.session.username=null
+  res.json({
+    success:true,
+    message:'注销成功',
+    result:null
+  })
+}
+
+var checkLogin=require('./middlewares/checkLogin').checkLogin;
+var checkNotLogin=require('./middlewares/checkLogin').checkNotLogin;
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
