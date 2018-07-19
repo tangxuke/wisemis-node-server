@@ -28,15 +28,12 @@ router.get('/', function(req, res, next) {
 //登录
 router.post('/login',(req,res,next)=>{
   req.body.password=sha1(req.body.password)
-  console.log(req.body)
+
   User.findOne({username:req.body.username,password:req.body.password})
     .then((doc)=>{
       if(doc){
         //用户信息写入session
-        console.log('Login:'+doc.username)
         req.session.username=doc.username
-        
-        console.log('session:'+JSON.stringify(req.session))
 
         res.json({
           success:true,

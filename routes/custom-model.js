@@ -38,6 +38,7 @@ router.post('/:model/del',(req,res,next)=>{
 
 //修改记录
 router.post('/:model/edit',(req,res,next)=>{
+    console.log(req.body)
     var p=GetModel(req.params.model);
 
     p.then((value)=>{

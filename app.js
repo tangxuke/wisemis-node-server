@@ -55,12 +55,12 @@ app.use(session({
   secret: 'asdfjklk#$%^&*()$%^&*',
   resave: false,
   saveUninitialized: true,
-	cookie: {maxAge: 1000 * 60 * 30}
+	cookie: {maxAge: 1000 * 60 * 60}
 }));
 
 //全局登录拦截
 app.use((req,res,next)=>{
-  console.log(req.session)
+
   if(req.session.username)
     next()
   else{
