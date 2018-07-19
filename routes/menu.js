@@ -10,6 +10,7 @@ var response={
 
 //获取菜单列表
 router.get('/',function(req,res,next){
+
     Menu.find({},(err,docs)=>{
         if(err){
             response.message=err.message

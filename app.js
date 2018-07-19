@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session=require('express-session');
+var mongoStore=require('connect-mongo');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,46 +14,18 @@ var customModelRouter=require('./routes/custom-model')
 
 var app = express();
 
-//使用session中间件
-//session
-app.use(session({
-	secret: 'asdfjklk#$%^&*()$%^&*',
-	cookie: {maxAge: 1000 * 60 * 30},
-	//每次更新
-	resave: true,
-	//强制保存未初始化的session
-	saveUninitialized: true
-}));
-
-
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //允许跨域访问中间件
 app.use(function(req,res,next){
-  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Origin','http://localhost:8080');
   res.set('Access-Control-Allow-Methods','GET,POST,OPTIONS');
   res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type');
+  res.set('Access-Control-Allow-Credentials', 'true');
   next();
 });
-
-//全局登录拦截
-app.use((req,res,next)=>{
-  if(req.session.username)
-    next()
-  else{
-    if(req.originalUrl=='/users/login' || req.originalUrl=='/users/logout')
-      next()
-    else{
-      res.json({
-        want_login:true
-      })
-    }
-  }
-})
 
 
 
@@ -69,11 +42,37 @@ mongoose.connection.on("disconnected", function () {
   console.log("MongoDB connected disconnected.")
 });
 
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//使用session中间件
+app.use(session({
+  secret: 'asdfjklk#$%^&*()$%^&*',
+  resave: false,
+  saveUninitialized: true,
+	cookie: {maxAge: 1000 * 60 * 30}
+}));
+
+//全局登录拦截
+app.use((req,res,next)=>{
+  console.log(req.session)
+  if(req.session.username)
+    next()
+  else{
+    if(req.originalUrl=='/users/login' || req.originalUrl=='/users/logout')
+      next()
+    else{
+      res.json({
+        want_login:true
+      })
+    }
+  }
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -33,8 +33,11 @@ router.post('/login',(req,res,next)=>{
     .then((doc)=>{
       if(doc){
         //用户信息写入session
+        console.log('Login:'+doc.username)
         req.session.username=doc.username
         
+        console.log('session:'+JSON.stringify(req.session))
+
         res.json({
           success:true,
           message:'',
