@@ -122,9 +122,9 @@ router.post('/change-pass-admin',(req,res,next)=>{
 
 //修改密码（用户），参数：用户名，旧密码，新密码
 router.post('/change-pass',(req,res,next)=>{
-  req.body.password=sha1(req.body.password)
+  req.body['old-password']=sha1(req.body['old-password'])
   req.body['new-password']=sha1(req.body['new-password'])
-  User.findOneAndUpdate({'username':req.body.username,'password':req.body.password},{'password':req.body['new-password']})
+  User.findOneAndUpdate({'username':req.body.username,'password':req.body['old-password']},{'password':req.body['new-password']})
       .then((doc)=>{
         if(doc){
           res.json({
