@@ -5,6 +5,36 @@ var router=express.Router();
 
 var GetModel=require('./../models/custom-model');
 
+//删除多条记录
+router.post('/:model/del-many',(req,res,next)=>{
+    var p=GetModel(req.params.model);
+
+    p.then((value)=>{
+        value.deleteMany(req.body.where)
+            .then((doc)=>{
+                res.json({
+                    success:true,
+                    message:'',
+                    result:doc
+                })
+            })
+            .catch((err)=>{
+                res.json({
+                    success:false,
+                    message:err.message,
+                    result:null
+                })
+            })
+    })
+    .catch((error)=>{
+        res.json({
+            success:false,
+            message:error.message,
+            result:null
+        })
+    })
+})
+
 //删除记录
 router.post('/:model/del',(req,res,next)=>{
     var p=GetModel(req.params.model);
