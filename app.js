@@ -55,7 +55,7 @@ app.use(session({
   secret: 'asdfjklk#$%^&*()$%^&*',
   resave: false,
   saveUninitialized: true,
-	cookie: {maxAge: 1000 * 60 * 60}
+	cookie: {maxAge: 1000 * 60 * 60 * 3}
 }));
 
 //全局登录拦截
