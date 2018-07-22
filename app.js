@@ -58,21 +58,8 @@ app.use(session({
 	cookie: {maxAge: 1000 * 60 * 60 * 3}
 }));
 
-//全局登录拦截
-app.use((req,res,next)=>{
-
-  if(req.session.username)
-    next()
-  else{
-    if(req.originalUrl=='/users/login' || req.originalUrl=='/users/logout')
-      next()
-    else{
-      res.json({
-        want_login:true
-      })
-    }
-  }
-})
+var checkPermission=require('./middlewares/checkPermission')
+app.use(checkPermission)
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

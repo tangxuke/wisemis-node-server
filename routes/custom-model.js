@@ -143,14 +143,14 @@ router.get('/:model',(req,res,next)=>{
         .catch((error)=>{
             res.json({
                 success:false,
-                message:'1'+error.message,
+                message:error.message,
                 result:null
             })
         })
     }).catch((err)=>{
         res.json({
                 success:false,
-                message:'2'+err.message,
+                message:err.message,
                 result:null
             })
     })

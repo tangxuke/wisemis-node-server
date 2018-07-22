@@ -18,7 +18,11 @@ module.exports=function(modelName){
             .then((doc)=>{
                 if(doc){
                     //生成架构
-                    var theSchama=mongoose.Schema(doc.schama)
+                    var schama=new Object()
+                    doc.schama.forEach(item=>{
+                        schama[item.name]=item.type
+                    })
+                    var theSchama=mongoose.Schema(schama)
 
                     resolve(mongoose.model(doc.name,theSchama,doc.collname));
                 }else{
