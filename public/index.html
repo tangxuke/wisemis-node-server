@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<head>
+    <title>test</title>
+    <script>
+        var observer=new MutationObserver(function(mutations,observer){
+            mutations.forEach(mutation=>{
+                console.log(mutation)
+            })
+        })
+
+        
+    </script>
+</head>
+
+<body>
+    <input type="file" onchange="onChange(event)"/>
+    <br/>
+    <img src=""/>
+    <p></p>
+    <script>
+        function onChange(event){
+            var file=event.target.files[0]
+            var reader=new FileReader()
+            reader.onload=function(event){
+                document.querySelector('img').src=event.target.result
+                document.querySelector('p').innerHTML=event.target.result
+            }
+            reader.readAsDataURL(file)
+        }
+    </script>
+</body>
+
+</html>
