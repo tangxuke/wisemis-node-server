@@ -59,7 +59,7 @@ app.use(session({
 }));
 
 var checkPermission=require('./middlewares/checkPermission')
-app.use(checkPermission)
+//app.use(checkPermission)
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
