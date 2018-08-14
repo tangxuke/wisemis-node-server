@@ -4,13 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session=require('express-session');
-var mongoStore=require('connect-mongo');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var menuRouter=require('./routes/menu')
-var modelRouter=require('./routes/model')
-var customModelRouter=require('./routes/custom-model')
+//路由
+var router = require('./routes');
 
 var app = express();
 
@@ -27,23 +23,6 @@ app.use(function(req,res,next){
   next();
 });
 
-
-
-//连接MongoDB数据库
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/demo');
-mongoose.connection.on("connected", function () {
-  console.log("MongoDB connected success.")
-});
-mongoose.connection.on("error", function () {
-  console.log("MongoDB connected fail.")
-});
-mongoose.connection.on("disconnected", function () {
-  console.log("MongoDB connected disconnected.")
-});
-
-
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -58,14 +37,10 @@ app.use(session({
 	cookie: {maxAge: 1000 * 60 * 60 * 3}
 }));
 
-var checkPermission=require('./middlewares/checkPermission')
+//var checkPermission=require('./middlewares/checkPermission')
 //app.use(checkPermission)
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/menu',menuRouter);
-app.use('/model',modelRouter);
-app.use('/custom-model',customModelRouter);
+app.use('/', router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
