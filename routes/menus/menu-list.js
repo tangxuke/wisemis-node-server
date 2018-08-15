@@ -31,7 +31,7 @@ function menu_list(req,res){
             return item['parentid']==0
         });
 
-        res.json(response.success(root))
+        res.json(response.success({routes:results,menu:root}))
     })
     .catch(err=>{
         res.json(response.error(err.message))
