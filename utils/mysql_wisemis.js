@@ -1,7 +1,5 @@
 var mysql=require('mysql');
 
-
-
 module.exports=function(sql){
     var p=new Promise(function(resolve,reject){
 
@@ -10,7 +8,7 @@ module.exports=function(sql){
             port:62178,
             user:'root',
             password:'hlh***TXK0921',
-            database:'education'
+            database:'wisemis'
         });
 
         connection.query(sql,function(error,results,fields){

@@ -1,5 +1,5 @@
 var sha1=require('sha1')
-var mysql=require('./../../utils/mysql')
+var mysql_wisemis=require('./../../utils/mysql_wisemis')
 var response=require('../../utils/response')
 
 
@@ -14,6 +14,30 @@ function login(req,res){
 
     var customer=username.split('@')[1]
 
+    //获取客户信息
+    mysql_wisemis(`select * from customer where name='${customer}'`)
+    .then(value=>{
+        if(value.results.length!==1){
+            res.json(response.error('客户信息不存在！'))
+            return;
+        }
+        var row=value.results[0];
+        req.session.connection={
+            host:row['server'],
+            port:row['port'],
+            user:row['user'],
+            password:row['password'],
+            database:row['database']
+        }  
+        res.json(response.success(req.session.connection))
+    }).catch(err=>{
+        res.json(response.error(err.message));
+        return;
+    })
+    .then(()=>{
+        console.log('end')
+    })
+    /*
     mysql(`select * from sys_user where username='${username}'`).then(value=>{
         console.log(value.results);
 
@@ -32,7 +56,7 @@ function login(req,res){
         }
     }).catch(err=>{
         res.json(response.error(err.message))
-    })
+    })*/
 }
 
 module.exports=login;

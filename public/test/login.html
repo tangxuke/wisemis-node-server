@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login test</title>
+</head>
+<body>
+    用例1：无@客户编号
+    <form method="POST" action="http://localhost:3000/users/login">
+        UserName:<input type="text" value="tangxuke" name="username"/>
+        <br/>
+        Password:<input type="text" value="123" name="password"/>
+        <br/>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    用例2：用户不存在
+    <form method="POST" action="http://localhost:3000/users/login">
+        UserName:<input type="text" value="not_exists@demo" name="username"/>
+        <br/>
+        Password:<input type="text" value="123" name="password"/>
+        <br/>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    用例3：正常,系统管理员，密码错误
+    <form method="POST" action="http://localhost:3000/users/login">
+        UserName:<input type="text" value="admin@demo" name="username"/>
+        <br/>
+        Password:<input type="text" value="1234" name="password"/>
+        <br/>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    用例4：正常,用户正确，密码正确，系统管理员
+    <form method="POST" action="http://localhost:3000/users/login">
+        UserName:<input type="text" value="admin@demo" name="username"/>
+        <br/>
+        Password:<input type="text" value="123" name="password"/>
+        <br/>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    用例5：正常,用户正确，密码正确，教师
+    <form method="POST" action="http://localhost:3000/users/login">
+        UserName:<input type="text" value="teacher@demo" name="username"/>
+        <br/>
+        Password:<input type="text" value="123" name="password"/>
+        <br/>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    用例6：正常,用户正确，密码正确，前台
+    <form method="POST" action="http://localhost:3000/users/login">
+        UserName:<input type="text" value="before@demo" name="username"/>
+        <br/>
+        Password:<input type="text" value="123" name="password"/>
+        <br/>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="/">返回首页</a>
+</body>
+</html>

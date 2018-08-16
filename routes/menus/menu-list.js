@@ -1,4 +1,4 @@
-var mysql=require('./../../utils/mysql')
+var mysql=require('./../../utils/mysql_wisemis')
 var response=require('./../../utils/response')
 
 
