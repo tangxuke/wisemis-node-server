@@ -4,7 +4,7 @@ var response=require('./../../utils/response')
 
 
 function menu_list(req,res){
-    mysql('select * from sys_menu order by parentid desc,orderid')
+    mysql('select * from menu where ifnull(disable,0)=0 order by parentid desc,orderid')
     .then(value=>{
         
         var results=value.results;

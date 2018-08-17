@@ -7,6 +7,13 @@ function login(req,res){
     var username=req.body.username;
     var password=sha1(req.body.password);
 
+    res.json(response.success({
+        uuid:'i_dont_know',
+        token:'i_dont_known',
+        name:'test'
+    }))
+    return;
+
     if(username.indexOf('@')===-1){
         res.json(response.error('用户名不合法!'))
         return;
