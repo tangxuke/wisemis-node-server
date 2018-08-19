@@ -1,46 +1,27 @@
-var mysql=require('./../../utils/mysql_wisemis')
+var mysql=require('./../../utils/mysql')
 var response=require('./../../utils/response')
+var menuToTree=require('../../utils/menu-to-tree')
 
-
+var sys_menu=[],custom_menu=[];
 
 function menu_list(req,res){
-    mysql('select * from menu where ifnull(disable,0)=0 order by parentid desc,orderid')
+
+    //测试方便
+    req.session.database='demo';
+
+    mysql('select * from menu where ifnull(disable,0)=0 order by parentid desc,orderid','wisemis')
     .then(value=>{
         
         var results=value.results;
+        sys_menu=menuToTree(results);
 
-        //全部元素加children属性
-        var root=results.map(item=>{
-            //统一加children属性
-            if(item.children==undefined)
-                item.children=[];
-
-            return item;
-        }).map((item,index,arr)=>{
-            //子菜单自动加入到上层菜单children数组中
-            if(item['parentid']>0){
-                var parent=arr.find(e=>{
-                    return e.id==item['parentid'];
-                });
-                parent.children.push(item);
-            }
-            return item;
-        }).map(item=>{
-            //没有子菜单删除children属性
-            if(item.children.length==0)
-                delete item.children;
-            //删除orderid属性
-            if(typeof item.orderid!==undefined)
-                delete item.orderid
-
-            return item;
+        mysql('select * from custom_menu where ifnull(disable,0)=0 order by parentid desc,orderid',req.session.database)
+        .then(v=>{
+            custom_menu=menuToTree(v.results);
+            res.json(response.success([...sys_menu,...custom_menu]))
+        }).catch(err=>{
+            res.json(response.error(err.message))
         })
-        .filter(item=>{
-            //只返回第一层
-            return item['parentid']==0
-        });
-
-        res.json(response.success(root))
     })
     .catch(err=>{
         res.json(response.error(err.message))

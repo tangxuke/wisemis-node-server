@@ -1,16 +1,11 @@
 var mysql=require('mysql');
+var ConnectionObject=require('./connection')
 
-module.exports=function(sql){
+module.exports=function(sql,database){
+    ConnectionObject.database=database;
     var p=new Promise(function(resolve,reject){
 
-        var connection=mysql.createConnection({
-            host:'gz-cdb-0jo34sqt.sql.tencentcdb.com',
-            port:62178,
-            user:'root',
-            password:'hlh***TXK0921',
-            database:'wisemis'
-        });
-
+        var connection=mysql.createConnection(ConnectionObject);
         connection.query(sql,function(error,results,fields){
             if(error)
                 reject(error);
