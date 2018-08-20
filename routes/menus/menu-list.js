@@ -13,6 +13,7 @@ function menu_list(req,res){
     .then(value=>{
         
         var results=value.results;
+
         sys_menu=menuToTree(results);
 
         mysql('select * from custom_menu where ifnull(disable,0)=0 order by parentid desc,orderid',req.session.database)
@@ -20,11 +21,12 @@ function menu_list(req,res){
             custom_menu=menuToTree(v.results);
             res.json(response.success([...sys_menu,...custom_menu]))
         }).catch(err=>{
-            res.json(response.error(err.message))
+            res.json(response.error('1'+err.message))
         })
+
     })
     .catch(err=>{
-        res.json(response.error(err.message))
+        res.json(response.error('2'+err.message))
     })
 }
 
