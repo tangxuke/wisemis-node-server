@@ -5,8 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session=require('express-session');
 
-//路由
-var router = require('./routes');
+
 
 var app = express();
 
@@ -20,7 +19,10 @@ app.use(function(req,res,next){
   res.set('Access-Control-Allow-Methods','GET,POST,OPTIONS');
   res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type');
   res.set('Access-Control-Allow-Credentials', 'true');
-  next();
+  if(req.method=='OPTIONS')
+  res.sendStatus(200)
+  else
+    next();
 });
 
 app.use(logger('dev'));
@@ -36,6 +38,9 @@ app.use(session({
   saveUninitialized: true,
 	cookie: {maxAge: 1000 * 60 * 60 * 3}
 }));
+
+//路由
+var router = require('./routes');
 
 //var checkPermission=require('./middlewares/checkPermission')
 //app.use(checkPermission)
