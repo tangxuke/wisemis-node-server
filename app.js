@@ -14,16 +14,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //允许跨域访问中间件
-app.use(function(req,res,next){
-  res.setHeader('Access-Control-Allow-Origin','http://localhost:8080');
-  res.set('Access-Control-Allow-Methods','GET,POST,OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type');
-  res.set('Access-Control-Allow-Credentials', 'true');
-  if(req.method=='OPTIONS')
-  res.sendStatus(200)
-  else
-    next();
-});
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -38,6 +29,15 @@ app.use(session({
   saveUninitialized: true,
 	cookie: {maxAge: 1000 * 60 * 60 * 3}
 }));
+
+app.use(function(req,res,next){
+  res.setHeader('Access-Control-Allow-Origin','http://localhost:8080');
+  res.set('Access-Control-Allow-Methods','GET,POST,OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type');
+  res.set('Access-Control-Allow-Credentials', 'true');
+  
+  next();
+});
 
 //路由
 var router = require('./routes');
