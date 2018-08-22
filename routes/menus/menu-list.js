@@ -6,8 +6,6 @@ var sys_menu=[],custom_menu=[];
 
 function menu_list(req,res){
 
-    console.log(req.session)
-
     mysql('select * from menu where ifnull(disable,0)=0 order by parentid desc,orderid','wisemis')
     .then(value=>{
         

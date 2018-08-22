@@ -26,7 +26,6 @@ function login(req,res){
         }
         var row=value.results[0];
         req.session.database=row['database'];
-        console.log(req.session)
         return mysql(`select * from user where username='${username}'`,req.session.database);
     })
     .then(value=>{
@@ -46,9 +45,6 @@ function login(req,res){
     })
     .catch(err=>{
         res.json(response.error(err.message));
-    })
-    .then(()=>{
-        console.log('end');
     })
 }
 
