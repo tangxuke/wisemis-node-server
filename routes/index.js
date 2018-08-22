@@ -3,7 +3,7 @@ var router = express.Router();
 
 var users=require('./users')
 var menus=require('./menus')
-var business=require('./business')
+var models=require('./models')
 
 //用户相关路由
 router.use('/users',users)
@@ -12,7 +12,7 @@ router.use('/users',users)
 router.use('/menus',menus)
 
 //业务相关路由
-router.use('/business',business)
+router.use('/models',models)
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
