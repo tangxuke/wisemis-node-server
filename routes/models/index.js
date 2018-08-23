@@ -2,21 +2,18 @@ var express=require('express')
 var router=express.Router()
 var response=require('./../../utils/response')
 
-/**
- * 获取表格定义
- */
-var GetTableJson=require('./get-table-json')
-router.get('/get-table-json/:modelName',GetTableJson)
 
 /**
- * 获取表单定义
+ * 获取字段列表
  */
-var GetFormJson=require('./get-form-json')
-router.get('/get-form-json/:modelName',GetFormJson)
+var columns=require('./columns')
+router.get('/columns/:modelName',columns)
 
-//默认
-router.use('/',function(req,res){
-    res.json(response.error('请指定具体路由'))
+/**
+ * 错误的路由
+ */
+router.use(function(req,res,next){
+    res.json(response.error('未定义的路由，请检查！'+req.originalUrl))
 })
 
 module.exports=router

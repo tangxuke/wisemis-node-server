@@ -11,7 +11,7 @@ router.use('/users',users)
 //菜单相关路由
 router.use('/menus',menus)
 
-//业务相关路由
+//业务模型相关路由
 router.use('/models',models)
 
 /* GET home page. */

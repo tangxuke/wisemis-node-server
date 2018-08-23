@@ -1,7 +1,3 @@
-var mysql=require('../utils/mysql')
-
-function get_model(modelName,req,res){
-    var database=req.session.database
+function GetModel(modelName){
+    return require(`./${modelName}`)
 }
-
-module.exports=get_model;
