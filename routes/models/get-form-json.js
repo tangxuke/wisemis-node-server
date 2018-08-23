@@ -8,7 +8,7 @@ var path=require('path')
  */
 function GetFormJson(req,res){
     var modelName=req.params.modelName;
-    var pathName=`./../../models/${modelName}`
+    var pathName=`../../models/${modelName}.js`
     pathName=path.join(__dirname,pathName)
     console.log(pathName)
     if(!fs.existsSync(pathName)){
