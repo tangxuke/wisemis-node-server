@@ -1,6 +1,6 @@
 var mysql=require('./../../utils/mysql')
 var response=require('./../../utils/response')
-var menuToTree=require('../../utils/menu-to-tree')
+var menuToTree=require('../../utils/array-to-tree')
 
 var sys_menu=[],custom_menu=[];
 
@@ -18,12 +18,12 @@ function menu_list(req,res){
             custom_menu=menuToTree(v.results);
             res.json(response.success([...sys_menu,...custom_menu]))
         }).catch(err=>{
-            res.json(response.error('1'+err.message))
+            res.json(response.error(err.message))
         })
 
     })
     .catch(err=>{
-        res.json(response.error('2'+err.message))
+        res.json(response.error(err.message))
     })
 }
 
