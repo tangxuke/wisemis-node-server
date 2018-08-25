@@ -1,17 +1,32 @@
-/**
- * 部门架构对象
- */
-function Schama(){
-    return {
-        table:'department',
-        fields:[
-            {
-                name:'id',
-                title:'Id',
-                type:'string'
-            }
-        ]
-    }
-}
+var Form=require('../model')
+var Field=require('../field')
 
-module.exports=Schama;
+var form=new Form();
+form.TableName='department'
+form.ColumnCount=2
+form.Fields.push(
+    new Field()
+    .setName('type')
+    .setTitle('类型')
+    .setControlType('Select')
+    .setOption('部门','1')
+    .setOption('校区','2')
+)
+form.Fields.push(new Field().setName('name').setTitle('名称'))
+form.Fields.push(
+    new Field()
+    .setName('duty')
+    .setTitle('职责')
+    .setControlType('Select')
+    .setOption('教师','1')
+    .setOption('学生','2')
+    .setOption('家长','3')
+    .setValue('3')
+)
+form.Fields.push(new Field().setName('parentid').setValue(0).setTitle('上级部门'))
+form.Fields.push(new Field().setName('tel').setTitle('联系电话'))
+form.Fields.push(new Field().setName('leader').setIcon('user').setValue('唐旭克').setTitle('负责人'))
+form.Fields.push(new Field().setName('address').setColSpan(3).setTitle('地址'))
+form.SetValue('ColumnCount',2);
+
+module.exports=form;

@@ -6,14 +6,14 @@ var sys_menu=[],custom_menu=[];
 
 function menu_list(req,res){
 
-    mysql('select * from menu where ifnull(disable,0)=0 order by parentid desc,orderid','wisemis')
+    mysql('select * from menu where ifnull(disable,0)=0 order by parentid desc,orderid',[],'wisemis')
     .then(value=>{
         
         var results=value.results;
 
         sys_menu=menuToTree(results);
 
-        mysql('select * from custom_menu where ifnull(disable,0)=0 order by parentid desc,orderid',req.session.database)
+        mysql('select * from custom_menu where ifnull(disable,0)=0 order by parentid desc,orderid',[],'demo')
         .then(v=>{
             custom_menu=menuToTree(v.results);
             res.json(response.success([...sys_menu,...custom_menu]))

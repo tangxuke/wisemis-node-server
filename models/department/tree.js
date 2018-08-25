@@ -4,9 +4,9 @@ var mysql=require('./../../utils/mysql')
 /**
  * 返回部门树结构
  */
-module.exports=function(){
+module.exports=function(params){
     var p=new Promise(function(resolve,reject){
-        mysql('select * from department','demo')
+        mysql('select * from department',[],'demo')
         .then(value=>{
             TreeParam.titleColumn='name';
             var treeArray=value.results;
@@ -26,7 +26,7 @@ module.exports=function(){
             resolve(ArrayToTree(data,TreeParam));
         })
         .catch(message=>{
-            reject(message);
+            reject(message.message);
         })
     });
     return p;

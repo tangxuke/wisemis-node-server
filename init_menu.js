@@ -2,7 +2,7 @@ var mysql=require('./utils/mysql_wisemis')
 var fs=require('fs')
 
 var p=new Promise(function(resolve,reject){
-    mysql('select * from menu where ifnull(disable,0)=0 order by parentid desc,orderid')
+    mysql('select * from menu where ifnull(disable,0)=0 order by parentid desc,orderid',[],'wisemis')
     .then(value=>{
         
         var results=value.results;

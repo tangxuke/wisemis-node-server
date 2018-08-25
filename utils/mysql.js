@@ -1,12 +1,19 @@
 var mysql=require('mysql');
 var ConnectionObject=require('./connection')
 
-module.exports=function(sql,database){
+/**
+ * 
+ * @param {string} sql SQL语句
+ * @param {any[]} params 参数化查询的参数数组
+ * @param {string} database 数据库
+ */
+module.exports=function(sql,params,database){
+    params = params || [];
     ConnectionObject.database=database;
     var p=new Promise(function(resolve,reject){
 
         var connection=mysql.createConnection(ConnectionObject);
-        connection.query(sql,function(error,results,fields){
+        connection.query(sql,params,function(error,results,fields){
             if(error)
                 reject(error);
             else{

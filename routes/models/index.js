@@ -11,8 +11,8 @@ router.use('/:modelName/:action',function(req,res,next){
         .then(value=>{
             res.json(response.success(value))
         })
-        .catch(message=>{
-            res.json(response.error(message))
+        .catch(err=>{
+            res.json(response.error(err.message))
         })
 })
 
