@@ -39,9 +39,29 @@ function Field(){
      * 字段图标，如果有的话
      */
     this.Icon='';
+    /**
+     * 新增时是否保存此字段
+     */
+    this.IsInsert=true;
+    /**
+     * 修改时是否保存此字段
+     */
+    this.IsUpdate=true;
 
-
-
+    /**
+     * 设置属性值
+     * @param {string} name 属性名
+     * @param {any} value 属性值
+     * @returns {Field} 返回对象本身
+     */
+    this.setPropertyValue=function(name,value){
+        if(this[name]==undefined)
+            throw new Error(`提示：属性 ${name} 未定义！`);
+        else
+            this[name]=value;
+        
+        return this;
+    }
 
     /**
      * 设置备选值
@@ -65,6 +85,7 @@ function Field(){
     /**
      * 设置字段标题
      * @param {string} title 字段标题
+     * @returns {Field} 返回对象本身
      */
     this.setTitle=function(title){
         this.Title=title;
@@ -110,6 +131,7 @@ function Field(){
     /**
      * 设置图标
      * @param {string} icon 图标名称
+     * @returns {Field} 返回对象本身
      */
     this.setIcon=function(icon){
         this.Icon=icon;

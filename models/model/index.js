@@ -1,4 +1,4 @@
-var mysql=require('../utils/mysql');
+
 
 /**
  * 模型对象定义
@@ -17,7 +17,7 @@ function Model(){
      */
     this.Fields=[];
     /**
-     * 主键字段
+     * 主键字段,默认id
      */
     this.KeyField='id';
     
@@ -27,20 +27,25 @@ function Model(){
      * @param {any} value 属性值
      * @returns {Model}
      */
-    this.SetValue=function(proprety,value){
+    this.SetPropertyValue=function(proprety,value){
         this[proprety]=value;
         return this;
     }
 
+    /**
+     * 删除数据
+     * @param {object} data 包含主键的JSON对象
+     */
+    this.Delete=function(data){
+        return require('./action/delete')(this,data);
+    }
+
+    /**
+     * 保存数据（暂时只做新增功能）
+     * @param {object} data 数据JSON对象
+     */
     this.Save=function(data){
-        console.log(data);
-        var insertFields=[],insertValues=[];
-        this.Fields.forEach(item=>{
-            insertFields.push(item.Name);
-            insertValues.push(data[item.Name]);
-        });
-        var sql='insert into `'+this.TableName+'`('+insertFields.join(',')+') values ('+insertFields.map(item=>{return '?'}).join(',')+');';
-        return mysql(sql,insertValues,'demo');
+        return require('./action/save')(this,data);
     }
 }
 

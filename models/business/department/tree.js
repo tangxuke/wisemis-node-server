@@ -1,6 +1,6 @@
-var ArrayToTree=require('../../utils/array-to-tree')
-var TreeParam=require('../../utils/tree-params')
-var mysql=require('./../../utils/mysql')
+var ArrayToTree=require('../../../utils/array-to-tree')
+var TreeParam=require('../../../utils/tree-params')
+var mysql=require('../../../utils/mysql')
 /**
  * 返回部门树结构
  */

@@ -24,7 +24,7 @@ module.exports=function(data,params){
         item[childrenElement]=[];
 
         item['title']=item[titleColumn]
-
+        
         return item;
     }).map((item,index,arr)=>{
         //子菜单自动加入到上层菜单children数组中
@@ -47,9 +47,10 @@ module.exports=function(data,params){
         return !item[parentColumn];
         //只返回第一层
     }).map(item=>{
+        //自动展开
         item.expand=true;
         return item;
-    })
+    });
 
     return root;
 }

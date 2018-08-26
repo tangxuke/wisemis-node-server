@@ -1,5 +1,5 @@
-var Form=require('../model')
-var Field=require('../field')
+var Form=require('../../model')
+var Field=require('../../model/field')
 
 var form=new Form();
 form.TableName='department'
@@ -11,6 +11,12 @@ form.Fields.push(
     .setControlType('Select')
     .setOption('部门','1')
     .setOption('校区','2')
+);
+form.Fields.push(new Field()
+    .setName('id')
+    .setTitle('Id')
+    .setPropertyValue('IsInsert',false)
+    .setPropertyValue('IsUpdate',false)
 )
 form.Fields.push(new Field().setName('name').setTitle('名称'))
 form.Fields.push(
@@ -27,6 +33,5 @@ form.Fields.push(new Field().setName('parentid').setValue(0).setTitle('上级部
 form.Fields.push(new Field().setName('tel').setTitle('联系电话'))
 form.Fields.push(new Field().setName('leader').setIcon('user').setValue('唐旭克').setTitle('负责人'))
 form.Fields.push(new Field().setName('address').setColSpan(3).setTitle('地址'))
-form.SetValue('ColumnCount',2);
 
 module.exports=form;
