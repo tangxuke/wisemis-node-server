@@ -9,5 +9,5 @@ var mysql=require('../../../utils/mysql');
 module.exports=function(model,data){
     var keyField=model.KeyField;
     var sql='delete from `'+model.TableName+'` where `'+keyField+'`=?';
-    return mysql(sql,data[keyField],'demo');
+    return mysql(sql,data[keyField],model.Database);
 }

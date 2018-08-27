@@ -16,5 +16,5 @@ module.exports=function(model,data){
             
         });
         var sql='insert into `'+model.TableName+'`('+insertFields.join(',')+') values ('+insertFields.map(item=>{return '?'}).join(',')+');';
-        return mysql(sql,insertValues,'demo');
+        return mysql(sql,insertValues,model.Database);
 }

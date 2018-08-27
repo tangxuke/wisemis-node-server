@@ -5,6 +5,10 @@
  */
 function Model(){
     /**
+     * 默认数据库
+     */
+    this.Database='demo';
+    /**
      * 后台表
      */
     this.TableName='';
@@ -13,13 +17,14 @@ function Model(){
      */
     this.ColumnCount=1;
     /**
+     * 主键字段,默认id
+     */
+    this.KeyField='id';    
+    /**
      * 字段列表
      */
     this.Fields=[];
-    /**
-     * 主键字段,默认id
-     */
-    this.KeyField='id';
+
     
     /**
      * 设置属性值并返回当前对象

@@ -1,4 +1,4 @@
-var mysql=require('./utils/mysql_wisemis')
+var mysql=require('./utils/mysql')
 var fs=require('fs')
 
 var p=new Promise(function(resolve,reject){
@@ -58,12 +58,12 @@ import ${element.name} from './routes/${element.name}'
         `;
         exportText+=`...${element.name},`;
         //创建路由文件
-        if(fs.existsSync('C:\\vue.js\\d2-admin\\src\\router\\routes\\'+element.name+'.js'))
-            fs.unlinkSync('C:\\vue.js\\d2-admin\\src\\router\\routes\\'+element.name+'.js');
+        if(fs.existsSync('C:\\vue.js\\wisemis-web-platform\\src\\router\\routes\\'+element.name+'.js'))
+            fs.unlinkSync('C:\\vue.js\\wisemis-web-platform\\src\\router\\routes\\'+element.name+'.js');
         //创建页面文件
         //创建根目录
-        if(!fs.existsSync('C:\\vue.js\\d2-admin\\src\\pages\\'+element.name))
-            fs.mkdirSync('C:\\vue.js\\d2-admin\\src\\pages\\'+element.name)
+        if(!fs.existsSync('C:\\vue.js\\wisemis-web-platform\\src\\pages\\'+element.name))
+            fs.mkdirSync('C:\\vue.js\\wisemis-web-platform\\src\\pages\\'+element.name)
 
         var text=`
 //${element.title} 路由定义
@@ -82,15 +82,15 @@ export default [
         element.children.forEach(item=>{
             //创建页面文件
             var pagename=item.path.replace(element.path+'/','');
-            if(!fs.existsSync(`C:\\vue.js\\d2-admin\\src\\pages\\${element.name}\\${pagename}`))
-                fs.mkdirSync(`C:\\vue.js\\d2-admin\\src\\pages\\${element.name}\\${pagename}`);
-            if(!fs.existsSync(`C:\\vue.js\\d2-admin\\src\\pages\\${element.name}\\${pagename}\\index.vue`)){
+            if(!fs.existsSync(`C:\\vue.js\\wisemis-web-platform\\src\\pages\\${element.name}\\${pagename}`))
+                fs.mkdirSync(`C:\\vue.js\\wisemis-web-platform\\src\\pages\\${element.name}\\${pagename}`);
+            if(!fs.existsSync(`C:\\vue.js\\wisemis-web-platform\\src\\pages\\${element.name}\\${pagename}\\index.vue`)){
                 var indexVueText=`
 <template>
     <d2-container>${item.title}</d2-container>
 </template>
                 `;
-                fs.writeFileSync(`C:\\vue.js\\d2-admin\\src\\pages\\${element.name}\\${pagename}\\index.vue`,indexVueText,'utf-8');
+                fs.writeFileSync(`C:\\vue.js\\wisemis-web-platform\\src\\pages\\${element.name}\\${pagename}\\index.vue`,indexVueText,'utf-8');
             };
             text+=`
             {
@@ -107,13 +107,13 @@ export default [
 ] 
        `;
        
-        fs.writeFileSync('C:\\vue.js\\d2-admin\\src\\router\\routes\\'+element.name+'.js',text,'utf-8')
+        fs.writeFileSync('C:\\vue.js\\wisemis-web-platform\\src\\router\\routes\\'+element.name+'.js',text,'utf-8')
        
     });
     routerText+=`
 export default [${exportText.substr(0,exportText.length-1)}]
 `;
- fs.writeFileSync('C:\\vue.js\\d2-admin\\src\\router\\my-router-index.js',routerText,'utf-8')
+ fs.writeFileSync('C:\\vue.js\\wisemis-web-platform\\src\\router\\my-router-index.js',routerText,'utf-8')
 }).catch(err=>{
 
 })
