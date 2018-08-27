@@ -8,7 +8,15 @@ var TreeParam=require('./tree-params')
  * @param {string} childrenElement children节点名称，默认'children'
  */
 module.exports=function(data,params){
-    params = params || TreeParam;
+    var defaultParam={
+        childrenElement:'children',
+        parentColumn:'parentid',
+        keyColumn:'id',
+        titleColumn:'title'
+    };
+    
+    params = Object.assign(defaultParam,params);
+    
 
     childrenElement = params.childrenElement;
     parentColumn = params.parentColumn;
