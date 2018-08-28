@@ -47,6 +47,14 @@ function Field(){
      * 修改时是否保存此字段
      */
     this.IsUpdate=true;
+    /**
+     * 在网格中显示
+     */
+    this.ShowInGrid=true;
+    /**
+     * 在表单中显示
+     */
+    this.ShowInForm=true;
 
     /**
      * 设置属性值
