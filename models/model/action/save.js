@@ -5,6 +5,7 @@ var mysql=require('../../../utils/mysql');
  * 保存数据（目前暂时只支持新建）
  * @param {Model} model 
  * @param {object} data 
+ * @returns {Promise}
  */
 module.exports=function(model,data){
     var insertFields=[],insertValues=[];
