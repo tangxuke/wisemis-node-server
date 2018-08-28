@@ -23,13 +23,15 @@ form.Fields.push(
 )
 form.Fields.push(
     new Field()
-    .setName('remark')
-    .setTitle('说明')
+    .setName('column_count')
+    .setTitle('列数')
+    .setValue(2)
 )
 form.Fields.push(
     new Field()
-    .setName('column_count')
-    .setTitle('列数')
+    .setName('remark')
+    .setTitle('说明')
 )
+
 
 module.exports=form;
