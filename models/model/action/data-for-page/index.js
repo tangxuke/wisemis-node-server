@@ -1,5 +1,5 @@
-var mysql=require('../../../utils/mysql')
-var Model=require('../index')
+var mysql=require('../../../../utils/mysql')
+var Model=require('../..')
 /**
  * 返回分页数据
  * @param {Model} model 模型对象

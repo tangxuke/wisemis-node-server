@@ -1,5 +1,5 @@
-var Model=require('../index')
-var mysql=require('../../../utils/mysql')
+var Model=require('../..')
+var mysql=require('../../../../utils/mysql')
 
 /**
  * 获取实体数据

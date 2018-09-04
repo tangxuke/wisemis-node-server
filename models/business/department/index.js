@@ -17,6 +17,7 @@ form.Fields.push(new Field()
     .setTitle('Id')
     .setPropertyValue('IsInsert',false)
     .setPropertyValue('IsUpdate',false)
+    .setPropertyValue('IsKey',true)
 )
 form.Fields.push(new Field().setName('name').setTitle('名称'))
 form.Fields.push(
@@ -29,8 +30,8 @@ form.Fields.push(
     .setOption('家长','3')
     .setValue('3')
 )
-form.Fields.push(new Field().setName('parentid').setValue(0).setTitle('上级部门'))
-form.Fields.push(new Field().setName('tel').setTitle('联系电话').setControlType('select-department-control'))
+form.Fields.push(new Field().setName('parentid').setValue(0).setTitle('上级部门').setControlType('select-department-control'))
+form.Fields.push(new Field().setName('tel').setTitle('联系电话'))
 form.Fields.push(new Field().setName('leader').setIcon('user').setValue('唐旭克').setTitle('负责人'))
 form.Fields.push(new Field().setName('address').setColSpan(3).setTitle('地址'))
 

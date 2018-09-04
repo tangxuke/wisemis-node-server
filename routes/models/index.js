@@ -7,6 +7,7 @@ var Model=require('../../models')
  * 获取模型操作
  */
 router.use('/:modelName/:action',function(req,res,next){
+
     Model(req.params.modelName,req.params.action,{...req.body,...req.query})
         .then(value=>{
             res.json(response.success(value))

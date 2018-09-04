@@ -1,3 +1,4 @@
+var Model=require('../../index')
 /**
  * 返回表格组件的模型
  * @param {Model} model 模型对象

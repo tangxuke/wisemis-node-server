@@ -10,6 +10,7 @@ form.Fields.push(
     new Field()
     .setName('name')
     .setTitle('模型名称')
+    .setPropertyValue('IsKey',true)
 );
 form.Fields.push(
     new Field()

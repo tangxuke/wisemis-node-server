@@ -34,7 +34,7 @@ function Field(){
     /**
      * 字段值
      */
-    this.Value=null;
+    this.Value='';
     /**
      * 字段图标，如果有的话
      */
@@ -48,6 +48,10 @@ function Field(){
      */
     this.IsUpdate=true;
     /**
+     * 是否关键字段
+     */
+    this.IsKey=false;
+    /**
      * 在网格中显示
      */
     this.ShowInGrid=true;
@@ -55,6 +59,21 @@ function Field(){
      * 在表单中显示
      */
     this.ShowInForm=true;
+    /**
+     * 默认值
+     */
+    this.DefaultValue=null;
+    /**
+     * 更改前值
+     */
+    this.OldValue=null;
+
+    /**
+     * 检查值是否更改
+     */
+    this.CheckIsChanged=function(){
+        return this.Value!==this.OldValue;
+    }
 
     /**
      * 设置属性值

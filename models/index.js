@@ -6,6 +6,7 @@ var fs=require('fs');
  * @param {JSON} params 
  */
 module.exports=function(modelName,action,params){
+
     return new Promise(function(resolve,reject){
         //查找模型文件是否存在
         var pathname=`${__dirname}\\business\\${modelName}\\action\\${action}`;
@@ -18,14 +19,14 @@ module.exports=function(modelName,action,params){
                 //采用默认action
                 var model=require(pathname);
                 pathname=`${__dirname}\\model\\action\\${action}`;
-                console.log(pathname)
+
                 if(fs.existsSync(pathname)||fs.existsSync(pathname+'.js'))
                     resolve(require(pathname)(model,params));
                 else
-                    reject(new Error(`1找不到模型 ${modelName}\\${action}`));
+                    reject(new Error(`找不到模型 ${modelName}\\${action}`));
             }
             else
-                reject(new Error(`2找不到模型 ${modelName}\\${action}`));
+                reject(new Error(`找不到模型 ${modelName}\\${action}`));
         }
             
     });

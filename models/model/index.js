@@ -1,4 +1,4 @@
-
+var Field=require('./field')
 
 /**
  * 模型对象定义
@@ -25,7 +25,14 @@ function Model(){
      */
     this.Fields=[];
 
-    
+    /**
+     * 获取字段列表
+     * @returns {Field[]}
+     */
+    this.getFields=function(){
+        return this.Fields;
+    }
+
     /**
      * 设置属性值并返回当前对象
      * @param {string} proprety 属性名
@@ -51,6 +58,16 @@ function Model(){
      */
     this.Save=function(data){
         return require('./action/save')(this,data);
+    }
+
+    /**
+     * 设置字段
+     * @param {Field} field 添加的字段
+     * @returns {Model}
+     */
+    this.SetField=function(field){
+        this.Fields.push(field);
+        return this;
     }
 }
 
