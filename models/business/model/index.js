@@ -22,6 +22,15 @@ form.Fields.push(
     .setName('tablename')
     .setTitle('业务表')
 )
+form.SetField(
+    new Field()
+    .setName('database')
+    .setTitle('数据库')
+    .setValue('demo')
+    .setControlType('Select')
+    .setOption('系统库','wisemis')
+    .setOption('演示库','demo')
+)
 form.Fields.push(
     new Field()
     .setName('column_count')

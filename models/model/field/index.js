@@ -62,7 +62,7 @@ function Field(){
     /**
      * 默认值
      */
-    this.DefaultValue=null;
+    this.DefaultValue='';
     /**
      * 更改前值
      */
@@ -162,6 +162,46 @@ function Field(){
      */
     this.setIcon=function(icon){
         this.Icon=icon;
+        return this;
+    }
+
+    /**
+     * 设置主键
+     * @param {boolean} value
+     * @returns {Field}
+     */
+    this.setIsKey=function(value){
+        this.IsKey=value;
+        return this;
+    }
+
+    /**
+     * 是否支持插入
+     * @param {boolean} value 
+     * @returns {Field}
+     */
+    this.setIsInsert=function(value){
+        this.IsInsert=value;
+        return this;
+    }
+
+    /**
+     * 是否支持修改
+     * @param {boolean} value 
+     * @returns {Field}
+     */
+    this.setIsUpdate=function(value){
+        this.IsUpdate=value;
+        return this;
+    }
+
+    /**
+     * 设置默认值
+     * @param {any} value
+     * @returns {Field}
+     */
+    this.setDefaultValue=function(value){
+        this.DefaultValue=value;
         return this;
     }
 }

@@ -1,15 +1,21 @@
 var Model=require('../..')
 var mysql=require('../../../../utils/mysql')
-
+var page={
+    current:1,  //当前页
+    pagesize:10 //每页条数
+}
 /**
  * 获取实体数据
  * @param {Model} model 模型对象
- * @param {object} data 参数对象
+ * @param {page} data 参数对象
  * @returns {Promise}
  */
 module.exports=function(model,data){
     return new Promise(function(resolve,reject){
-        var sql='select * from '+model.TableName
+        var sql='select * from '+model.TableName;
+        if(data.current && data.pagesize)
+            sql+=` limit ${(data.current-1)*data.pagesize},${data.pagesize}`;
+
         mysql(sql,[],model.Database).then(value=>{
             resolve(value.results);
         }).catch(reason=>{
