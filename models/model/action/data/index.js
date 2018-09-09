@@ -13,11 +13,38 @@ var page={
 module.exports=function(model,data){
     return new Promise(function(resolve,reject){
         var sql='select * from '+model.TableName;
+        var values=[];
+        if(data.where){
+            /**
+             * where 格式
+             * data:{
+             * ...,
+             * where:[{key:fieldName1,value:fieldValue1},{key:fieldName2,value:fieldValue2},...]
+             * }
+             */
+            var where=data.where.map(item=>{
+                values.push(item.value);
+                return '`'+item.key+'`=?';
+            }).join(' and ');
+            sql+=' where '+where;
+        }
         if(data.current && data.pagesize)
             sql+=` limit ${(data.current-1)*data.pagesize},${data.pagesize}`;
 
-        mysql(sql,[],model.Database).then(value=>{
-            resolve(value.results);
+        mysql(sql,values,model.Database).then(value=>{
+            var recordset=value.results
+            model.getFields().forEach(item=>{
+                if(item.Type==='boolean'){
+                    recordset=recordset.map(e=>{
+
+                        e[item.Name]=Buffer.from(e[item.Name]).readInt8(0)===1?true:false;
+
+                        return e;
+                    });
+                }
+            });
+            //resolve(value.results);
+            resolve(recordset);
         }).catch(reason=>{
             reject(reason);
         })

@@ -1,9 +1,36 @@
 var Field=require('./field')
+var Relation=require('./relation')
 
 /**
  * 模型对象定义
  */
 function Model(){
+    /**
+     * 模型名称
+     */
+    this.Name='';
+    /**
+     * 设置模型名称
+     * @param {string} name 模型名称
+     * @returns {Model}
+     */
+    this.setName=function(name){
+        this.Name=name;
+        return this;
+    }
+    /**
+     * 模型标题
+     */
+    this.Title='';
+    /**
+     * 设置模型标题
+     * @param {string} title 模型标题
+     * @returns {Model}
+     */
+    this.setTitle=function(title){
+        this.Title=title;
+        return this;
+    }
     /**
      * 默认数据库
      */
@@ -68,6 +95,28 @@ function Model(){
     this.SetField=function(field){
         this.Fields.push(field);
         return this;
+    }
+
+    /**
+     * 关系对象数组
+     */
+    this.Relations=[];
+    /**
+     * 设置关系对象
+     * @param {Relation} relation 
+     * @returns {Model}
+     */
+    this.setRelation=function(relation){
+        this.Relations.push(relation);
+        return this;
+    }
+
+    /**
+     * 返回关系对象数组
+     * @returns {Relation[]}
+     */
+    this.getRelations=function(){
+        return this.Relations;
     }
 }
 

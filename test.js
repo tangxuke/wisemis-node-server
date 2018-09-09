@@ -1,3 +1,3 @@
-var encrypt_password=require('./utils/encrypt_password')
+var buffer=Buffer.from([0]);
 
-console.log(encrypt_password('123'))
+console.log(buffer.readInt8(0));

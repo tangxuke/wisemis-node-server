@@ -6,7 +6,8 @@ var form=new Model()
 form.ColumnCount=2
 form.Database='demo'
 form.TableName='classroom'
-form.KeyField='name'
+form.Name='classroom'
+form.Title='教室'
 form.Fields.push(
     new Field()
     .setPropertyValue('Name','name')
@@ -31,5 +32,6 @@ form.Fields.push(
     .setPropertyValue('Title','容纳人数')
     .setPropertyValue('Value',1)
 )
+
 
 module.exports=form

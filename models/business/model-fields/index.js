@@ -6,6 +6,7 @@ var model=new Model();
 model.ColumnCount=3;
 model.Database='wisemis';
 model.TableName='model_fields';
+model.setName('model-fields').setTitle('模型字段');
 model.SetField(
     new Field()
     .setName('model_name')
@@ -69,6 +70,7 @@ model.SetField(
     .setTitle('是否支持插入')
     .setControlType('Checkbox')
     .setDefaultValue(true)
+    .setType('boolean')
 )
 .SetField(
     new Field()
@@ -76,6 +78,7 @@ model.SetField(
     .setTitle('是否支持修改')
     .setControlType('Checkbox')
     .setDefaultValue(true)
+    .setType('boolean')
 )
 .SetField(
     new Field()
@@ -83,6 +86,7 @@ model.SetField(
     .setTitle('是否主键')
     .setControlType('Checkbox')
     .setDefaultValue(false)
+    .setType('boolean')
 );
 
 

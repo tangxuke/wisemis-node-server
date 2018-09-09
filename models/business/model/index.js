@@ -1,11 +1,13 @@
 var Form=require('../../model')
 var Field=require('../../model/field')
+var Relation=require('../../model/relation')
 
 var form=new Form();
 form.TableName='model'
 form.ColumnCount=2
 form.KeyField='name'
 form.Database='wisemis'
+form.setName('model').setTitle('模型')
 form.Fields.push(
     new Field()
     .setName('name')
@@ -41,6 +43,19 @@ form.Fields.push(
     new Field()
     .setName('remark')
     .setTitle('说明')
+    .setWidth(200)
+)
+form.setRelation(
+    new Relation()
+    .setChildModel('model-fields')
+    .setMainFields('name')
+    .setChildFields('model_name')
+)
+.setRelation(
+    new Relation()
+    .setChildModel('classroom')
+    .setMainFields('name')
+    .setChildFields('name')
 )
 
 

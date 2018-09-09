@@ -14,7 +14,7 @@ function Field(){
     /**
      * 字段类型：string - 文本型（默认），boolean - 布尔型，date - 日期型，暂时这几样
      */
-    this.Type='text';
+    this.Type='string';
     /**
      * 网格列宽度，单位是px，默认80px
      */
@@ -202,6 +202,16 @@ function Field(){
      */
     this.setDefaultValue=function(value){
         this.DefaultValue=value;
+        return this;
+    }
+
+    /**
+     * 设置网格列宽度
+     * @param {number} value 网格列宽度，单位：px，默认80
+     * @returns {Field}
+     */
+    this.setWidth=function(value){
+        this.Width=value;
         return this;
     }
 }
