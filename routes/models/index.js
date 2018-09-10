@@ -18,6 +18,14 @@ router.use('/:modelName/:action',function(req,res,next){
 })
 
 /**
+ * 获取模型对象
+ */
+router.use('/:modelName',function(req,res,next){
+    var model=require('./../../models/business/'+req.params.modelName)
+    res.json(model)
+})
+
+/**
  * 错误的路由
  */
 router.use(function(req,res,next){
