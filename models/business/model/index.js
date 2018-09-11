@@ -51,12 +51,5 @@ form.setRelation(
     .setMainFields('name')
     .setChildFields('model_name')
 )
-.setRelation(
-    new Relation()
-    .setChildModel('classroom')
-    .setMainFields('name')
-    .setChildFields('name')
-)
-
 
 module.exports=form;
