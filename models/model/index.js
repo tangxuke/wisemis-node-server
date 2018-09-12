@@ -42,11 +42,7 @@ function Model(){
     /**
      * 列数
      */
-    this.ColumnCount=1;
-    /**
-     * 主键字段,默认id
-     */
-    this.KeyField='id';    
+    this.ColumnCount=1;  
     /**
      * 字段列表
      */

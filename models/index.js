@@ -20,7 +20,7 @@ module.exports=function(modelName,action,params){
             pathname=`${__dirname}\\business\\${modelName}`;
             if(fs.existsSync(pathname)||fs.existsSync(pathname+'.js')){
                 //采用默认action
-                var model=require(pathname);
+                var model=new require(pathname)();
                 pathname=`${__dirname}\\model\\action\\${action}`;
 
                 if(fs.existsSync(pathname)||fs.existsSync(pathname+'.js')){

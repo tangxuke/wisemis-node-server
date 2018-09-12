@@ -1,20 +1,9 @@
-function Test(){
-    this.name='';
-    this.visible=true;
+var mysql=require('./utils/mysql')
 
-    /**
-     * 
-     * @param {boolean} visible 
-     * @returns {Test}
-     */
-    this.setVisible=function(visible){
-        this.visible=visible;
-        return this;
-    }
-    this.show=function(){
-        console.log(this.visible);
-    }
-}
-
-new Test().setVisible(false).show();
-new Test().show();
+mysql('select * from model where name=?',['model'],'wisemis')
+.then(value=>{
+    console.log(value.results[0].name)
+})
+.catch(reason=>{
+    console.log(reason)
+})
