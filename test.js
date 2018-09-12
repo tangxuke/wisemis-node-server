@@ -1,3 +1,20 @@
-var buffer=Buffer.from([0]);
+function Test(){
+    this.name='';
+    this.visible=true;
 
-console.log(buffer.readInt8(0));
+    /**
+     * 
+     * @param {boolean} visible 
+     * @returns {Test}
+     */
+    this.setVisible=function(visible){
+        this.visible=visible;
+        return this;
+    }
+    this.show=function(){
+        console.log(this.visible);
+    }
+}
+
+new Test().setVisible(false).show();
+new Test().show();

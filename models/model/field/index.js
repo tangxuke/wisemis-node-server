@@ -214,5 +214,25 @@ function Field(){
         this.Width=value;
         return this;
     }
+
+    /**
+     * 在表单中显示
+     * @param {boolean} show 是否显示
+     * @returns {Field}
+     */
+    this.setShowInForm=function(show){
+        this.ShowInForm=show;
+        return this;
+    }
+
+    /**
+     * 在网格中显示
+     * @param {boolean} show 是否显示
+     * @returns {Field}
+     */
+    this.setShowInGrid=function(show){
+        this.ShowInGrid=show;
+        return this;
+    }
 }
 module.exports=Field;

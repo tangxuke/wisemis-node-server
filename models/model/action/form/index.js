@@ -5,7 +5,9 @@
  * @returns {Promise}
  */
 module.exports=function(model,params){
+    console.log('form')
     return new Promise(function(resolve,reject){
+        console.log(model)
         model.Fields=model.Fields.filter(item=>{
             return item.ShowInForm;
         })
