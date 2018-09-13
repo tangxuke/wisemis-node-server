@@ -1,9 +1,4 @@
-var mysql=require('./utils/mysql')
-
-mysql('select * from model where name=?',['model'],'wisemis')
-.then(value=>{
-    console.log(value.results[0].name)
-})
-.catch(reason=>{
-    console.log(reason)
-})
+//正则表达式测试
+var s='varchar(50)'
+var a=s.match(/\({1,}/);
+console.log(a.values())

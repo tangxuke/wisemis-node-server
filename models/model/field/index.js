@@ -234,5 +234,26 @@ function Field(){
         this.ShowInGrid=show;
         return this;
     }
+
+    /**
+     * 返回数据库字段类型
+     * @returns {string}
+     */
+    this.getSQLType=function(){
+        switch(this.Type){
+            case 'string':
+                return 'varchar(255)';
+            case 'number':
+                return 'float';
+            case 'time':
+                return 'datetime';
+            case 'date':
+                return 'datetime';
+            case 'boolean':
+                return 'bit'
+            default:
+                return 'varchar(255)';
+        }
+    }
 }
 module.exports=Field;

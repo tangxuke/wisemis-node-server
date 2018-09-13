@@ -1,5 +1,5 @@
 var mysql=require('mysql');
-var ConnectionObject=require('./connection')
+var ConnectionObject=require('./connection-batch')
 
 var result={
     results:[],
@@ -22,7 +22,6 @@ module.exports=function(sql,params,database){
             if(error)
                 reject(error);
             else{
-                console.log(fields);
                 resolve({
                     results,
                     fields

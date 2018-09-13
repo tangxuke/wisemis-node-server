@@ -3,6 +3,7 @@ var Model=require('../../../../model');
 var Field=require('../../../../model/field');
 var fs=require('fs');
 var path=require('path');
+var SaveTable=require('./save-table')
 
 /**
  * 应用模板
@@ -32,7 +33,6 @@ function Apply(data){
             mysql('select * from model_fields where model_name=?',[modelName],'wisemis')
             .then(value1=>{
                 value1.results.forEach(item=>{
-                    console.log(item);
                     var field=new Field()
                     .setName(item.field_name)
                     .setTitle(item.field_title)
@@ -49,31 +49,33 @@ function Apply(data){
                 })
 
                 //得到模型对象，匹配后台表，如有差异更改后台表
-                
+                SaveTable(model)
+                .then(value=>{
+                    var pathname=path.join(__dirname,'../../../',model.Name);
+                    if(!fs.existsSync(pathname)){
+                        fs.mkdirSync(pathname);
+                    }
+                    var filename=path.join(pathname,'index.js');
+                    if(fs.existsSync(filename))
+                        fs.unlinkSync(filename);
+                    
+                    var code="var Model=require('../../model/from-json');";
+                    code+='\nmodule.exports=function(){';
+                    code+='\n   var data='+JSON.stringify(model)+';'
+                    code+="\n   var model=Model(data);"
+                    code+="\n   return model;"
+                    code+='\n}';
+                    var success=fs.writeFileSync(filename,code);
 
-
-                var pathname=path.join(__dirname,'../../../',model.Name);
-                if(!fs.existsSync(pathname)){
-                    fs.mkdirSync(pathname);
-                }
-                var filename=path.join(pathname,'index.js');
-                if(fs.existsSync(filename))
-                    fs.unlinkSync(filename);
-                
-                var code='module.exports=function(){';
-                code+='\nreturn '+JSON.stringify(model)+';'
-                code+='\n}';
-                var success=fs.writeFileSync(filename,code);
-
-                resolve(success);
+                    resolve(success);
+                })
+                .catch(reason2=>{
+                    reject(reason2);
+                })
             })
             .catch(reason1=>{
                 reject(reason1);
-                return;
-            })
-
-            
-            
+            })  
         })
         .catch(reason=>{
             reject(reason);

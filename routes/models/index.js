@@ -7,6 +7,10 @@ var Model=require('../../models')
  * 获取模型操作
  */
 router.use('/:modelName/:action',function(req,res,next){
+    if(req.method!=='POST' && req.method!=='GET'){
+        res.send(200);
+        return;
+    }
 
     Model(req.params.modelName,req.params.action,{...req.body,...req.query})
         .then(value=>{
