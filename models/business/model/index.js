@@ -41,7 +41,8 @@ function GetModel(){
         new Field()
         .setName('column_count')
         .setTitle('列数')
-        .setValue(2)
+        .setDefaultValue(3)
+        .setValue(3)
         .setShowInGrid(false)
     )
     form.Fields.push(

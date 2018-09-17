@@ -39,15 +39,24 @@ function GetModel(){
     )
     .SetField(
         new Field()
+        .setName('field_length')
+        .setTitle('后台字段长度')
+        .setDefaultValue(50)
+        .setShowInGrid(false)
+    )
+    .SetField(
+        new Field()
         .setName('grid_column_width')
         .setTitle('网格列宽度')
         .setDefaultValue(80)
+        .setShowInGrid(false)
     )
     .SetField(
         new Field()
         .setName('form_col_span')
         .setTitle('表单跨列数')
         .setDefaultValue(1)
+        .setShowInGrid(false)
     )
     .SetField(
         new Field()
@@ -59,11 +68,13 @@ function GetModel(){
         .setOption('复选框','Checkbox')
         .setOption('部门选择框','department-dialog')
         .setDefaultValue('Input')
+        .setShowInGrid(false)
     )
     .SetField(
         new Field()
         .setName('icon')
         .setTitle('图标')
+        .setShowInGrid(false)
     )
     .SetField(
         new Field()
@@ -72,6 +83,7 @@ function GetModel(){
         .setControlType('Checkbox')
         .setDefaultValue(true)
         .setType('boolean')
+        .setShowInGrid(false)
     )
     .SetField(
         new Field()
@@ -80,6 +92,7 @@ function GetModel(){
         .setControlType('Checkbox')
         .setDefaultValue(true)
         .setType('boolean')
+        .setShowInGrid(false)
     )
     .SetField(
         new Field()
@@ -88,6 +101,7 @@ function GetModel(){
         .setControlType('Checkbox')
         .setDefaultValue(false)
         .setType('boolean')
+        .setShowInGrid(false)
     );
 
     return model;

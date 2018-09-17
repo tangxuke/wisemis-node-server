@@ -10,7 +10,7 @@ var SaveTable=require('./save-table')
  * @param {Object} data
  */
 function Apply(data){
-    var modelName='tangxuke'
+    var modelName=data.modelName;
     var model=new Model();
 
     return new Promise(function(resolve,reject){

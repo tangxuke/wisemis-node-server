@@ -25,8 +25,8 @@ router.use('/:modelName/:action',function(req,res,next){
  * 获取模型对象
  */
 router.use('/:modelName',function(req,res,next){
-    var model=require('./../../models/business/'+req.params.modelName)
-    res.json(model)
+    var model=require('./../../models/business/'+req.params.modelName)();
+    res.json(response.success(model))
 })
 
 /**

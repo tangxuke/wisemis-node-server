@@ -16,6 +16,10 @@ function Field(){
      */
     this.Type='string';
     /**
+     * 字段长度
+     */
+    this.FieldLength=50;
+    /**
      * 网格列宽度，单位是px，默认80px
      */
     this.Width=80;
@@ -126,6 +130,15 @@ function Field(){
      */
     this.setType=function(type){
         this.Type=type;
+        return this;
+    }
+    /**
+     * 设置后台字段长度
+     * @param {number} len 后台字段长度
+     * @returns {Field}
+     */
+    this.setFieldLength=function(len){
+        this.FieldLength=len;
         return this;
     }
     /**
