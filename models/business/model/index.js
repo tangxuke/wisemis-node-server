@@ -5,7 +5,7 @@ function GetModel(){
     
     var form=new Form();
     form.TableName='model'
-    form.ColumnCount=2
+    form.ColumnCount=3
     form.KeyField='name'
     form.Database='wisemis'
     form.setName('model').setTitle('模型')
@@ -42,7 +42,6 @@ function GetModel(){
         .setName('column_count')
         .setTitle('列数')
         .setDefaultValue(3)
-        .setValue(3)
         .setShowInGrid(false)
     )
     form.Fields.push(
