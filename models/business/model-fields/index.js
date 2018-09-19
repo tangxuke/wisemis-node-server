@@ -40,7 +40,7 @@ function GetModel(){
     .SetField(
         new Field()
         .setName('field_length')
-        .setTitle('后台字段长度')
+        .setTitle('字段长度')
         .setDefaultValue(50)
         .setShowInGrid(false)
     )
@@ -79,7 +79,7 @@ function GetModel(){
     .SetField(
         new Field()
         .setName('is_insert')
-        .setTitle('是否支持插入')
+        .setTitle('支持插入')
         .setControlType('Checkbox')
         .setDefaultValue(true)
         .setType('boolean')
@@ -88,7 +88,7 @@ function GetModel(){
     .SetField(
         new Field()
         .setName('is_update')
-        .setTitle('是否支持修改')
+        .setTitle('支持修改')
         .setControlType('Checkbox')
         .setDefaultValue(true)
         .setType('boolean')

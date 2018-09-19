@@ -73,6 +73,20 @@ function Field(){
     this.OldValue=null;
 
     /**
+     * 是否搜索字段
+     */
+    this.SearchField=false;
+    /**
+     * 设置搜索字段
+     * @param {boolean} value 是否搜索字段
+     * @returns {Field}
+     */
+    this.setSearchField=function(value){
+        this.SearchField=value;
+        return this;
+    }
+
+    /**
      * 检查值是否更改
      */
     this.CheckIsChanged=function(){

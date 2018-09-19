@@ -43,8 +43,5 @@ module.exports=function(model,data){
         })
     });
     return p;
-        
-
-
 }
 

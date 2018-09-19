@@ -22,7 +22,7 @@ module.exports=function(sql,params,database){
             if(error)
                 reject(error);
             else{
-                console.log(fields);
+
                 resolve({
                     results,
                     fields

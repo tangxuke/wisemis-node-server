@@ -30,7 +30,7 @@ function updateFn(model,data){
         return '`'+item.Name+'`=?';
     }).join(' and ');
     sql+=' where '+keyExpr;
-    console.log(sql);
+
     return mysql(sql,values,model.Database);
 }
 

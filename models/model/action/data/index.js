@@ -11,6 +11,8 @@ var page={
  * @returns {Promise}
  */
 module.exports=function(model,data){
+    console.log(data);
+    
     return new Promise(function(resolve,reject){
         var sql='select * from '+model.TableName;
         var values=[];
