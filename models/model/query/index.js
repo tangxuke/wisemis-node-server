@@ -1,3 +1,5 @@
+var Field=require('./field');
+
 /**
  * 查询对象
  */
@@ -13,6 +15,20 @@ function Query(){
      */
     this.setName=function(name){
         this.Name=name;
+        return this;
+    }
+
+    /**
+     * 列数
+     */
+    this.ColumnCount=3;
+    /**
+     * 设置查询表单列数
+     * @param {number} count 查询表单列数
+     * @returns {Query}
+     */
+    this.setColumnCount=function(count){
+        this.ColumnCount=count;
         return this;
     }
     /**
@@ -32,6 +48,23 @@ function Query(){
      * 查询字段列表
      */
     this.Fields=[];
+    /**
+     * 添加查询字段
+     * @param {Field} field 查询字段
+     * @returns {Query}
+     */
+    this.AddField=function(field){
+        this.Fields.push(field);
+        return this;
+    }
+
+    /**
+     * 返回查询字段列表
+     * @returns {Field[]}
+     */
+    this.getFields=function(){
+        return this.Fields;
+    }
 }
 
 module.exports=Query;

@@ -12,7 +12,7 @@ function Field(){
      * @returns {Field}
      */
     this.setTitle=function(title){
-        thit.Title=title;
+        this.Title=title;
         return this;
     }
     /**
@@ -64,6 +64,33 @@ function Field(){
      */
     this.setOption=function(option){
         this.Options.push(option);
+        return this;
+    }
+
+    /**
+     * 字段跨列数
+     */
+    this.ColSpan=1;
+    /**
+     * 设置字段跨列数
+     * @param {number} count 跨列数
+     */
+    this.setColSpan=function(count){
+        this.ColSpan=count;
+        return this;
+    }
+
+    /**
+     * 控件类型
+     */
+    this.ControlType='Input';
+    /**
+     * 设置控件类型
+     * @param {string} type 控件类型
+     * @returns {Field}
+     */
+    this.setControlType=function(type){
+        this.ControlType=type;
         return this;
     }
 }
