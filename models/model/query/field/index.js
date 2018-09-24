@@ -3,6 +3,19 @@
  */
 function Field(){
     /**
+     * 查询字段名称
+     */
+    this.Name='';
+    /**
+     * 设置字段名称
+     * @param {string} name 字段名称
+     * @returns {Field}
+     */
+    this.setName=function(name){
+        this.Name=name;
+        return this;
+    }
+    /**
      * 字段标题
      */
     this.Title='';
@@ -55,15 +68,30 @@ function Field(){
         return this;
     }
     /**
+     * 默认值
+     */
+    this.DefaultValue='';
+    /**
+     * 设置默认值
+     * @param {string} value 默认值
+     * @returns {Field}
+     */
+    this.setDefaultValue=function(value){
+        this.DefaultValue=value;
+        return this;
+    }
+    /**
      * 备选值
      */
     this.Options=[];
     /**
      * 设置选项
-     * @param {string} option 选项
+     * @param {string} label 标签
+     * @param {string} value 值
+     * @returns {Field}
      */
-    this.setOption=function(option){
-        this.Options.push(option);
+    this.setOption=function(label,value){
+        this.Options.push({label,value});
         return this;
     }
 

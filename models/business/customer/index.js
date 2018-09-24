@@ -1,0 +1,6 @@
+var Model=require('../../model/from-json');
+module.exports=function(){
+   var data={"Name":"customer","Title":"意向客户","Database":"demo","TableName":"customer","ColumnCount":3,"OrderBy":"","Fields":[{"Name":"name","Title":"姓名","Type":"string","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Input","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":true,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false,"OrderId":0},{"Name":"sex","Title":"性别","Type":"string","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Select","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":false,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false,"OrderId":0},{"Name":"birthdate","Title":"出生日期","Type":"date","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"DatePicker","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":false,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false,"OrderId":0}],"Relations":[],"Remark":""};
+   var model=Model(data);
+   return model;
+}

@@ -7,12 +7,19 @@ function GetModel(){
     model.ColumnCount=3;
     model.Database='wisemis';
     model.TableName='model_fields';
+    model.setOrderBy('orderid,field_name')
     model.setName('model-fields').setTitle('模型字段');
     model.SetField(
         new Field()
         .setName('model_name')
         .setTitle('模型名称')
         .setIsKey(true)
+    )
+    .SetField(
+        new Field()
+        .setName('orderid')
+        .setTitle('顺序号')
+        .setDefaultValue(0)
     )
     .SetField(
         new Field()
@@ -47,14 +54,14 @@ function GetModel(){
     .SetField(
         new Field()
         .setName('grid_column_width')
-        .setTitle('网格列宽度')
+        .setTitle('网格列宽')
         .setDefaultValue(80)
         .setShowInGrid(false)
     )
     .SetField(
         new Field()
         .setName('form_col_span')
-        .setTitle('表单跨列数')
+        .setTitle('表单跨列')
         .setDefaultValue(1)
         .setShowInGrid(false)
     )
@@ -67,6 +74,7 @@ function GetModel(){
         .setOption('下拉框','Select')
         .setOption('复选框','Checkbox')
         .setOption('部门选择框','department-dialog')
+        .setOption('日期选择框','DatePicker')
         .setDefaultValue('Input')
         .setShowInGrid(false)
     )

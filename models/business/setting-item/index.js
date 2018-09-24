@@ -1,0 +1,6 @@
+var Model=require('../../model/from-json');
+module.exports=function(){
+   var data={"Name":"setting-item","Title":"设置项目","Database":"demo","TableName":"setting_item","ColumnCount":3,"OrderBy":"","Fields":[{"Name":"type","Title":"项目类型","Type":"string","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Input","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":true,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false,"OrderId":0},{"Name":"item","Title":"项目名称","Type":"string","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Input","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":true,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false,"OrderId":0},{"Name":"remark","Title":"项目描述","Type":"string","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Input","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":false,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false,"OrderId":0}],"Relations":[],"Remark":""};
+   var model=Model(data);
+   return model;
+}

@@ -1,0 +1,6 @@
+var Model=require('../../model/from-json');
+module.exports=function(){
+   var data={"Name":"class-time","Title":"上课时间","Database":"demo","TableName":"class_time","ColumnCount":3,"Fields":[{"Name":"name","Title":"名称","Type":"string","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Input","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":true,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false,"OrderId":0},{"Name":"start_time","Title":"开始时间","Type":"string","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Input","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":false,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false,"OrderId":0},{"Name":"end_time","Title":"结束时间","Type":"string","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Input","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":false,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false,"OrderId":0}],"Relations":[],"Remark":"上课时间设置"};
+   var model=Model(data);
+   return model;
+}

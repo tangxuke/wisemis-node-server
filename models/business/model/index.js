@@ -8,6 +8,7 @@ function GetModel(){
     form.ColumnCount=3
     form.KeyField='name'
     form.Database='wisemis'
+    form.setOrderBy('name')
     form.setName('model').setTitle('模型')
     console.log(form.Fields)
     form.Fields.push(
@@ -49,6 +50,12 @@ function GetModel(){
         .setName('remark')
         .setTitle('说明')
         .setWidth(200)
+        .setShowInGrid(false)
+    )
+    form.Fields.push(
+        new Field()
+        .setName('order_by')
+        .setTitle('排序表达式')
         .setShowInGrid(false)
     )
     form.setRelation(

@@ -12,41 +12,47 @@ var page={
  */
 module.exports=function(model,data){
     console.log(data);
-    
     return new Promise(function(resolve,reject){
         var sql='select * from '+model.TableName;
         var values=[];
+        var where=[];
         if(data.where){
-            /**
-             * where 格式
-             * data:{
-             * ...,
-             * where:[{key:fieldName1,value:fieldValue1},{key:fieldName2,value:fieldValue2},...]
-             * }
-             */
-            var where=data.where.map(item=>{
-                values.push(item.value);
-                return '`'+item.key+'`=?';
+            var where1=Object.keys(data.where).map(item=>{
+                values.push(data.where[item]);
+                return '`'+item+'`=?';
+            });
+            where.push(...where1);
+        }
+        if(data.query && Object.keys(data.query).length>0){
+            var q=data.query;
+            var Query=require(`../../../business/${model.Name}/action/query`)();
+
+            var where2=Query.getFields().filter(item=>{
+                return Object.keys(q).findIndex(e=>{return item.Name===e && q[e]!=='<不限>';})>-1;
+            }).map(item=>{
+                item.Value=q[item.Name];
+                return item;
+            }).map(item=>{
+                return item.SearchExpr.replace(/\?/g,"'"+item.Value+"'");
+            });
+
+            where.push(...where2);   
+        }
+        if(where.length>0){
+            sql+=' where '+where.map(item=>{
+                return '('+item+')';
             }).join(' and ');
-            sql+=' where '+where;
+        }
+        if(model.OrderBy){
+            sql+=' order by '+model.OrderBy;
         }
         if(data.current && data.pagesize)
             sql+=` limit ${(data.current-1)*data.pagesize},${data.pagesize}`;
+        
+        console.log(sql);
 
         mysql(sql,values,model.Database).then(value=>{
-            var recordset=value.results
-            model.getFields().forEach(item=>{
-                if(item.Type==='boolean'){
-                    recordset=recordset.map(e=>{
-
-                        e[item.Name]=Buffer.from(e[item.Name]).readInt8(0)===1?true:false;
-
-                        return e;
-                    });
-                }
-            });
-            //resolve(value.results);
-            resolve(recordset);
+            resolve(value.results);
         }).catch(reason=>{
             reject(reason);
         })

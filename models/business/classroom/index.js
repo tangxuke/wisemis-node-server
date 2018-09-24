@@ -1,41 +1,10 @@
-function GetModel(){
-    var Model=require('../../model')
-    var Field=require('../../model/field')
-
-    var form=new Model()
-
-    form.ColumnCount=2
-    form.Database='demo'
-    form.TableName='classroom'
-    form.Name='classroom'
-    form.Title='教室'
-    form.Fields.push(
-        new Field()
-        .setPropertyValue('Name','name')
-        .setPropertyValue('Title','教室名称')
-        .setPropertyValue('IsKey',true)
-    )
-    form.Fields.push(
-        new Field()
-        .setPropertyValue('Name','rows')
-        .setPropertyValue('Title','行数')
-        .setPropertyValue('Value',1)
-    )
-    form.Fields.push(
-        new Field()
-        .setPropertyValue('Name','cols')
-        .setPropertyValue('Title','列数')
-        .setPropertyValue('Value',1)
-    )
-    form.Fields.push(
-        new Field()
-        .setPropertyValue('Name','capacity')
-        .setPropertyValue('Title','容纳人数')
-        .setPropertyValue('Value',1)
-    )
-
-    return form;
+var Model=require('../../model/from-json');
+module.exports=function(){
+   var data={"Name":"classroom","Title":"教室","Database":"demo","TableName":"classroom","ColumnCount":2,
+   "Fields":[
+       {"Name":"Name","Title":"教室名称","Type":"string","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Input","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":true,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false},
+       {"Name":"PersonCount","Title":"容纳人数","Type":"number","FieldLength":50,"Width":80,"ColSpan":1,"ControlType":"Input","Options":[],"Value":"","Icon":"","IsInsert":true,"IsUpdate":true,"IsKey":false,"ShowInGrid":true,"ShowInForm":true,"DefaultValue":"","OldValue":null,"SearchField":false}
+    ],"Relations":[],"Remark":"教室对象"};
+   var model=Model(data);
+   return model;
 }
-
-
-module.exports=GetModel;

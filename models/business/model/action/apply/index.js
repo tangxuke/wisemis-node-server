@@ -30,7 +30,7 @@ function Apply(data){
             .SetPropertyValue('Remark',result.remark)
             .SetPropertyValue('Database',result.database)
 
-            mysql('select * from model_fields where model_name=?',[modelName],'wisemis')
+            mysql('select * from model_fields where model_name=? order by orderid,field_name',[modelName],'wisemis')
             .then(value1=>{
                 value1.results.forEach(item=>{
                     var field=new Field()

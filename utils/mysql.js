@@ -23,8 +23,36 @@ module.exports=function(sql,params,database){
                 reject(error);
             else{
 
+                var bitFields=[];
+                if(Array.isArray(fields)){
+                    bitFields=fields.filter(field=>{
+                    return field.type===16;
+                    });
+                }
+                
+                var resultset=results;
+                if(Array.isArray(results)){
+                    resultset=results.map(row=>{
+                        bitFields.forEach(f=>{
+                            var fieldname=f.name;
+                            var fieldvalue=row[fieldname];
+
+                            if(Buffer.isBuffer(fieldvalue)){
+                                if(fieldvalue.readInt8(0)===1)
+                                    row[fieldname]=true;
+                                else
+                                    row[fieldname]=false;
+                            }
+                        });
+
+                        return row;
+                    });
+                };
+
+                //console.log(resultset);
+
                 resolve({
-                    results,
+                    results:resultset,
                     fields
                 });
             }

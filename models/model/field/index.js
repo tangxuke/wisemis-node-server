@@ -263,6 +263,20 @@ function Field(){
     }
 
     /**
+     * 排序号
+     */
+    this.OrderId=0;
+    /**
+     * 设置排序号
+     * @param {number} orderid 排序号
+     * @returns {Field}
+     */
+    this.setOrderId=function(orderid){
+        this.OrderId=orderid;
+        return this;
+    }
+
+    /**
      * 返回数据库字段类型
      * @returns {string}
      */
@@ -280,6 +294,17 @@ function Field(){
                 return 'bit'
             default:
                 return 'varchar(255)';
+        }
+    }
+
+    this.getSQLValue=function(){
+        switch(typeof this.Value){
+            case 'string':
+                return `'`+this.Value+`'`;
+            case 'boolean':
+                return this.Value?'1':'0';
+            default:
+                return ''+this.Value;
         }
     }
 }

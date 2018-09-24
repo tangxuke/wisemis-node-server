@@ -42,7 +42,20 @@ function Model(){
     /**
      * 列数
      */
-    this.ColumnCount=1;  
+    this.ColumnCount=1; 
+    /**
+     * 排序表达式
+     */
+    this.OrderBy=''; 
+    /**
+     * 设置排序表达式
+     * @param {string} orderby 排序表达式
+     * @returns {Model}
+     */
+    this.setOrderBy=function(orderby){
+        this.OrderBy=orderby;
+        return this;
+    }
     /**
      * 字段列表
      */

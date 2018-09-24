@@ -12,7 +12,6 @@ module.exports=function(modelName,action,params){
         var pathname=`${__dirname}\\business\\${modelName}\\action\\${action}`;
         
         if(fs.existsSync(pathname)||fs.existsSync(pathname+'.js')){
-            console.log('1')
             resolve(require(pathname)(params));
         } 
         else{
@@ -24,16 +23,13 @@ module.exports=function(modelName,action,params){
                 pathname=`${__dirname}\\model\\action\\${action}`;
 
                 if(fs.existsSync(pathname)||fs.existsSync(pathname+'.js')){
-                    console.log('2')
                     resolve(require(pathname)(model,params));
                 }
                 else{
-                    console.log('3')
                     reject(new Error(`找不到模型 ${modelName}\\${action}`));
                 }
             }
             else{
-                console.log('4')
                 reject(new Error(`找不到模型 ${modelName}\\${action}`));
             }
         }
