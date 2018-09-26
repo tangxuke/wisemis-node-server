@@ -80,6 +80,11 @@ function GetModel(){
     )
     .SetField(
         new Field()
+        .setName('select_options')
+        .setTitle('选择框数据源')
+    )
+    .SetField(
+        new Field()
         .setName('icon')
         .setTitle('图标')
         .setShowInGrid(false)

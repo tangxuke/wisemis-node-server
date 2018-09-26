@@ -45,6 +45,13 @@ function Apply(data){
                     .setIsUpdate(item.is_update)
                     .setIsKey(item.is_key);
 
+                    if(item.select_options){
+                        item.select_options.split(',').forEach(item=>{
+                            var items=item.split(':');
+                            field.setOption(items[0],items[1]);
+                        });
+                    }
+
                     model.Fields.push(field);
                 })
 
