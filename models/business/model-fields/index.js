@@ -85,6 +85,11 @@ function GetModel(){
     )
     .SetField(
         new Field()
+        .setName('reg_expression')
+        .setTitle('正则表达式')
+    )
+    .SetField(
+        new Field()
         .setName('icon')
         .setTitle('图标')
         .setShowInGrid(false)

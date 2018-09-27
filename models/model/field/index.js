@@ -277,6 +277,20 @@ function Field(){
     }
 
     /**
+     * 正则表达式
+     */
+    this.RegExpression='';
+    /**
+     * 设置正则表达式
+     * @param {string} regExpr 正则表达式
+     * @returns {Field}
+     */
+    this.setRegExpression=function(regExpr){
+        this.RegExpression=regExpr;
+        return this;
+    }
+
+    /**
      * 返回数据库字段类型
      * @returns {string}
      */

@@ -43,7 +43,9 @@ function Apply(data){
                     .setIcon(item.icon)
                     .setIsInsert(item.is_insert)
                     .setIsUpdate(item.is_update)
-                    .setIsKey(item.is_key);
+                    .setIsKey(item.is_key)
+                    .setOrderId(item.orderid)
+                    .setRegExpression(item.reg_expression);               
 
                     if(item.select_options){
                         item.select_options.split(',').forEach(item=>{
