@@ -1,5 +1,6 @@
 var Field=require('./field')
 var Relation=require('./relation')
+var Script=require('./script')
 
 /**
  * 模型对象定义
@@ -36,13 +37,40 @@ function Model(){
      */
     this.Database='demo';
     /**
+     * 设置数据库
+     * @param {string} database 数据库
+     * @returns {Model}
+     */
+    this.setDatabase=function(database){
+        this.Database=database;
+        return this;
+    }
+    /**
      * 后台表
      */
     this.TableName='';
     /**
+     * 设置数据表
+     * @param {string} table 数据表
+     * @returns {Model}
+     */
+    this.setTableName=function(table){
+        this.TableName=table;
+        return this;
+    }
+    /**
      * 列数
      */
     this.ColumnCount=1; 
+    /**
+     * 设置表单列数
+     * @param {number} count 列数
+     * @returns {Model}
+     */
+    this.setColumnCount=function(count){
+        this.ColumnCount=count;
+        return this;
+    }
     /**
      * 排序表达式
      */
@@ -67,6 +95,31 @@ function Model(){
      */
     this.getFields=function(){
         return this.Fields;
+    }
+
+    /**
+     * 表单级脚本
+     */
+    this.Scripts=[];
+    /**
+     * 设置表单脚本
+     * @param {string} field 字段名称
+     * @param {string} type 事件类型
+     * @param {string} code 事件代码
+     * @returns {Model}
+     */
+    this.setScript=function(field,type,code){
+        var script=new Script(field,type,code);
+        this.Scripts.push(script);
+        return this;
+    }
+
+    /**
+     * 获取事件脚本对象
+     * @returns {Script[]}
+     */
+    this.getScripts=function(){
+        return this.Scripts;
     }
 
     /**
