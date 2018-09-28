@@ -35,6 +35,12 @@ function GetModel(){
     )
     .SetField(
         new Field()
+        .setName('params')
+        .setTitle('参数列表')
+        .setOrderId(35)
+    )
+    .SetField(
+        new Field()
         .setName('code')
         .setTitle('事件代码')
         .setColSpan(2)
