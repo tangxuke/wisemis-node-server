@@ -1,12 +1,11 @@
-var Model=require('./../../../../../model')
-var Field=require('./../../../../../model/field')
-var mysql=require('./../../../../../../utils/mysql')
-var mysql_batch=require('./../../../../../../utils/mysql-batch')
+var Model=require('../..')
+var mysql=require('../../../../utils/mysql')
+var mysql_batch=require('../../../../utils/mysql-batch')
 
 /**
  * 修改表结构
  * @param {Model} model 
- * @returns {Promise}
+ * @returns {Promise<boolean>}
  */
 function AlterTable(model){
     return new Promise(function(resolve,reject){
@@ -40,7 +39,7 @@ function AlterTable(model){
             if(alterSQL.length){
                 mysql_batch(alterSQL,[],model.Database)
                 .then(value1=>{
-                    resolve(value1);
+                    resolve(true);
                 })
                 .catch(reason1=>{
                     reject(reason1);
@@ -48,9 +47,6 @@ function AlterTable(model){
             }else{
                 resolve(true);
             }
-            
-
-            //reject(new Error(alterSQL))
         })
         .catch(reason=>{
             reject(reason);

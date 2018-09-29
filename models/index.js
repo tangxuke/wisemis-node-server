@@ -30,7 +30,21 @@ module.exports=function(modelName,action,params){
                 }
             }
             else{
-                reject(new Error(`找不到模型 ${modelName}\\${action}`));
+                //通过数据库查找模型
+                var GetModelFromDB=require('./model/from-db');
+                GetModelFromDB(modelName)
+                .then(model=>{
+                    pathname=`${__dirname}\\model\\action\\${action}`;
+                    if(fs.existsSync(pathname)||fs.existsSync(pathname+'.js')){
+                        resolve(require(pathname)(model,params));
+                    }
+                    else{
+                        reject(new Error(`找不到模型 ${modelName}\\${action}`));
+                    }
+                })
+                .catch(reason=>{
+                    reject(new Error(`找不到模型 ${modelName}\\${action},reason:${reason.message}`));
+                })
             }
         }
     });

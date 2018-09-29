@@ -2,6 +2,9 @@ var express=require('express')
 var router=express.Router()
 var response=require('./../../utils/response')
 var Model=require('../../models')
+var ModelFromDbPromise=require('../../models/model/from-db')
+var path=require('path');
+var fs=require('fs');
 
 /**
  * 获取模型操作
@@ -25,8 +28,19 @@ router.use('/:modelName/:action',function(req,res,next){
  * 获取模型对象
  */
 router.use('/:modelName',function(req,res,next){
-    var model=require('./../../models/business/'+req.params.modelName)();
-    res.json(response.success(model))
+    var pathname=path.join(__dirname,'./../../models/business/'+req.params.modelName);
+    if(fs.existsSync(pathname)){
+        var model=require(pathname);
+        res.json(response.success(model));
+    }else{
+        ModelFromDbPromise(req.params.modelName)
+        .then(value=>{
+            res.json(response.success(value))
+        })
+        .catch(reason=>{
+            res.json(response.error(reason.message));
+        })
+    }
 })
 
 /**

@@ -1,3 +1,4 @@
+var SetFieldFromRow=require('./from-row');
 
 /**
  * 字段对象
@@ -290,6 +291,18 @@ function Field(){
         return this;
     }
 
+    /**是否系统内置字段 */
+    this.System=false;
+    /**
+     * 设置是否系统内置字段
+     * @param {boolean} system 是否系统内置字段
+     * @returns {Field}
+     */
+    this.setSystem=system=>{
+        this.System=system;
+        return this;
+    }
+
     /**
      * 返回数据库字段类型
      * @returns {string}
@@ -320,6 +333,16 @@ function Field(){
             default:
                 return ''+this.Value;
         }
+    }
+
+    /**
+     * 从数据行设置字段
+     * @param {any} row 数据行
+     * @returns {Field}
+     */
+    this.setFieldFromRow=function(row){
+        SetFieldFromRow(this,row);
+        return this;
     }
 }
 module.exports=Field;

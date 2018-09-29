@@ -1,23 +1,17 @@
-var RowInfo={
-    /**字段名称*/
-    field_name:'',
-    /**事件类型*/
-    type:'',
-    /**参数列表*/
-    params:'',
-    /**事件代码*/
-    code:''
-}
 var Script=require('..')
 
 /**
  * 从数据行创建事件脚本对象
- * @param {RowInfo} row 
+ * @param {Script} script 脚本对象
+ * @param {{field_name:string,type:string,params:string,code:string}} row 
  * @returns {Script}
  */
-function GetScript(row){
-    var script=new Script(row.field_name,row.type,row.params,row.code);
-    return script;
+function SetScript(script,row){
+    script.setField(row.field_name)
+    .setType(row.type)
+    .setParams(row.params)
+    .setCode(row.code);
+
 }
 
-module.exports=GetScript;
+module.exports=SetScript;

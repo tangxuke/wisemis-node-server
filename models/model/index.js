@@ -1,6 +1,7 @@
 var Field=require('./field')
 var Relation=require('./relation')
 var Script=require('./script')
+var SetModelFromRow=require('./from-row')
 
 /**
  * 模型对象定义
@@ -82,6 +83,18 @@ function Model(){
      */
     this.setOrderBy=function(orderby){
         this.OrderBy=orderby;
+        return this;
+    }
+
+    /**是否系统内置模型 */
+    this.System=false;
+    /**
+     * 设置是否系统内置模型
+     * @param {boolean} system 是否系统内置
+     * @returns {Model}
+     */
+    this.setSystem=(system)=>{
+        this.System=system;
         return this;
     }
     /**
@@ -179,6 +192,16 @@ function Model(){
      */
     this.getRelations=function(){
         return this.Relations;
+    }
+
+    /**
+     * 从行数据设置模型对象
+     * @param {{name:string,title:string,tablename:string,database:string,column_count:number,order_by:string}} row 
+     * @returns {Model}
+     */
+    this.setModelFromRow=function(row){
+        SetModelFromRow(this,row);
+        return this;
     }
 }
 

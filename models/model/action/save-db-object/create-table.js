@@ -1,11 +1,10 @@
-var Model=require('./../../../../../model')
-var Field=require('./../../../../../model/field')
-var mysql=require('./../../../../../../utils/mysql')
+var Model=require('../..')
+var mysql=require('../../../../utils/mysql')
 
 /**
  * 修改表结构
  * @param {Model} model 
- * @returns {Promise}
+ * @returns {Promise<boolean>}
  */
 function CreateTable(model){
     return new Promise(function(resolve,reject){
@@ -16,7 +15,7 @@ function CreateTable(model){
         sql+=fields+')';
         mysql(sql,[],model.Database)
         .then(value=>{
-            resolve(value);
+            resolve(true);
         })
         .catch(reason=>{
             reject(reason);

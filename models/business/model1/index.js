@@ -10,7 +10,7 @@ function GetModel(){
     form.Database='wisemis'
     form.setOrderBy('name')
     form.setName('model').setTitle('模型')
-    console.log(form.Fields)
+
     form.Fields.push(
         new Field()
         .setName('name')
@@ -38,6 +38,7 @@ function GetModel(){
         .setOption('演示库','demo')
         .setShowInGrid(false)
     )
+    
     form.Fields.push(
         new Field()
         .setName('column_count')
@@ -58,12 +59,6 @@ function GetModel(){
         .setTitle('排序表达式')
         .setShowInGrid(false)
     )
-    form.setRelation(
-        new Relation()
-        .setChildModel('model-fields')
-        .setMainFields('name')
-        .setChildFields('model_name')
-    );
 
     return form;
 }
