@@ -42,6 +42,8 @@ module.exports=function(sql,params,database){
                                     row[fieldname]=true;
                                 else
                                     row[fieldname]=false;
+                            }else{
+                                row[fieldname]=false;
                             }
                         });
 

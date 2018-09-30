@@ -28,8 +28,12 @@ function SetField(field,row){
     if(row.select_options){
         row.select_options.split(',').forEach(
             item=>{
-                var s=item.split(':');
-                field.setOption(s[0],s[1]);
+                if(item.includes(':')){
+                    var s=item.split(':');
+                    field.setOption(s[0],s[1]);
+                }else{
+                    field.setOption(item,item);
+                }            
             }
         );
     }

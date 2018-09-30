@@ -28,9 +28,13 @@ router.use('/:modelName/:action',function(req,res,next){
  * 获取模型对象
  */
 router.use('/:modelName',function(req,res,next){
+    if(req.method!=='POST' && req.method!=='GET'){
+        res.send(200);
+        return;
+    }
     var pathname=path.join(__dirname,'./../../models/business/'+req.params.modelName);
     if(fs.existsSync(pathname)){
-        var model=require(pathname);
+        var model=require(pathname)();
         res.json(response.success(model));
     }else{
         ModelFromDbPromise(req.params.modelName)
