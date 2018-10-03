@@ -4,6 +4,7 @@ var router = express.Router();
 var users=require('./users')
 var menus=require('./menus')
 var models=require('./models')
+var query=require('./query')
 
 //用户相关路由
 router.use('/users',users)
@@ -13,6 +14,9 @@ router.use('/menus',menus)
 
 //业务模型相关路由
 router.use('/models',models)
+
+//查询数据相关路由
+router.use('/query',query);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
