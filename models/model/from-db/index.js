@@ -44,6 +44,14 @@ function GetModel(modelName) {
 
     return Promise.all([p1, p2, p3])
         .then(value => {
+            model.getScripts().forEach(ev=>{
+                var oField=model.getFields().find(item=>{
+                    return item.Name===ev.field;
+                });
+                if(oField){
+                    oField.getScripts().push(ev);
+                }
+            });
             return Promise.resolve(model);
         });
 }

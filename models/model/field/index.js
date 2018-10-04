@@ -1,4 +1,5 @@
 var SetFieldFromRow=require('./from-row');
+var Script=require('../script');
 
 /**
  * 字段对象
@@ -92,6 +93,18 @@ function Field(){
      */
     this.CheckIsChanged=function(){
         return this.Value!==this.OldValue;
+    }
+
+    /**
+     * 绑定到字段的事件脚本
+     */
+    this.Scripts=[];
+    /**
+     * 获取绑定到字段的事件脚本
+     * @returns {Script[]}
+     */
+    this.getScripts=function(){
+        return this.Scripts;
     }
 
     /**
