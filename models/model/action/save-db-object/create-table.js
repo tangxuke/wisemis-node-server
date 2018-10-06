@@ -9,10 +9,21 @@ var mysql=require('../../../../utils/mysql')
 function CreateTable(model){
     return new Promise(function(resolve,reject){
         var sql='create table `'+model.TableName+'` (';
+        var keys='';
         var fields=model.getFields().map(field=>{
-            return '`'+field.Name+'` '+field.getSQLType()+' null';
+            if(field.IsKey){
+                keys+=',`'+field.Name+'`';
+            }
+            return '`'+field.Name+'` '+field.getSQLType()+' null COMMENT '+`'${field.Title}'`;
         }).join(',');
-        sql+=fields+')';
+        if(keys.length>0){
+            keys=keys.substr(1);
+            fields+=',PRIMARY KEY ('+keys+')';
+        }
+        sql+=fields+');';
+
+        console.log(sql);
+
         mysql(sql,[],model.Database)
         .then(value=>{
             resolve(true);

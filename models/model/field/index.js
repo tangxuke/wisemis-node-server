@@ -32,11 +32,7 @@ function Field(){
     /**
      * 控件类型
      */
-    this.ControlType='Input';
-    /**
-     * 备选值
-     */
-    this.Options=[];
+    this.ControlType='my-textbox';
     /**
      * 字段值
      */
@@ -57,6 +53,19 @@ function Field(){
      * 是否关键字段
      */
     this.IsKey=false;
+    /**
+     * 是否不允许空
+     */
+    this.IsNotNull=false;
+    /**
+     * 设置是否不允许空
+     * @param {boolean} value 是否不允许空
+     * @returns {Field}
+     */
+    this.setIsNotNull=function(value){
+        this.IsNotNull=value;
+        return this;
+    }
     /**
      * 在网格中显示
      */
@@ -107,6 +116,18 @@ function Field(){
         return this.Scripts;
     }
 
+    /**字段所在页面 */
+    this.Page='';
+    /**
+     * 设置字段所在页面
+     * @param {string} page 页面名称
+     * @returns {Field}
+     */
+    this.setPage=function(page){
+        this.Page=page;
+        return this;
+    }
+
     /**
      * 设置属性值
      * @param {string} name 属性名
@@ -122,16 +143,6 @@ function Field(){
         return this;
     }
 
-    /**
-     * 设置备选值
-     * @param {string} label 显示值
-     * @param {any} value 字段值
-     * @returns {Field} 返回对象本身
-     */
-    this.setOption=function(label,value){
-        this.Options.push({label,value})
-        return this;
-    };
     /**
      * 设置字段名称
      * @param {string} name 字段名称
@@ -316,6 +327,78 @@ function Field(){
         return this;
     }
 
+    /**提示信息 */
+    this.ToolTip='';
+    /**
+     * 设置提示信息
+     * @param {string} info 提示信息
+     * @returns {Field}
+     */
+    this.setToolTip=function(info){
+        this.ToolTip=info;
+        return this;
+    }
+
+    /**数据源类型 */
+    this.DataSourceType='';
+    /**
+     * 设置数据源类型
+     * @param {string} type 数据源类型
+     * @returns {Field}
+     */
+    this.setDataSourceType=function(type){
+        this.DataSourceType=type;
+        return this;
+    }
+
+    /**数据源 */
+    this.DataSource='';
+    /**
+     * 设置数据源
+     * @param {string} code 数据源代码
+     * @returns {Field}
+     */
+    this.setDataSource=function(code){
+        this.DataSource=code;
+        return this;
+    }
+
+    /**数据源查询的返回字段 */
+    this.DataSourceSQLReturnField='';
+    /**
+     * 设置数据源查询的返回字段
+     * @param {string} field 返回字段
+     * @returns {Field}
+     */
+    this.setDataSourceSQLReturnField=function(field){
+        this.DataSourceSQLReturnField=field;
+        return this;
+    }
+
+    /**数据库查询的数据库 */
+    this.DataSourceSQLDatabase='';
+    /**
+     * 设置数据库查询的数据库
+     * @param {string} database 数据库
+     * @returns {Field}
+     */
+    this.setDataSourceSQLDatabase=function(database){
+        this.DataSourceSQLDatabase=database;
+        return this;
+    }
+
+    /**控件高度（1单位=32px） */
+    this.ControlHeight=1;
+    /**
+     * 设置控件高度
+     * @param {number} height 控件高度（1单位=32px）
+     * @returns {Field}
+     */
+    this.setControlHeight=function(height){
+        this.ControlHeight=height;
+        return this;
+    }
+
     /**
      * 返回数据库字段类型
      * @returns {string}
@@ -323,7 +406,10 @@ function Field(){
     this.getSQLType=function(){
         switch(this.Type){
             case 'string':
-                return 'varchar(255)';
+                if(this.FieldLength<=255)
+                    return 'varchar('+this.FieldLength+')';
+                else
+                    return 'text';
             case 'number':
                 return 'float';
             case 'time':

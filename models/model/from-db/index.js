@@ -2,6 +2,7 @@ var mysql = require('../../../utils/mysql');
 var Model = require('..');
 var Field = require('./../field');
 var Script = require('./../script');
+var Action = require('./../operation');
 
 /**
  * 从数据库中获取模型
@@ -41,9 +42,19 @@ function GetModel(modelName) {
                 model.Scripts.push(script);
             })
         });
+    
+    /**模型动作Promise */
+    var p4 = mysql('select * from model_actions where model_name=? order by orderid', [modelName], 'wisemis')
+        .then(value4 => {
+            value4.results.forEach(row => {
+                var action = new Action().setOperationFromRow(row);
+                model.Actions.push(action);
+            })
+        });
 
-    return Promise.all([p1, p2, p3])
+    return Promise.all([p1, p2, p3, p4])
         .then(value => {
+            //把字段相关的事件绑定到字段
             model.getScripts().forEach(ev=>{
                 var oField=model.getFields().find(item=>{
                     return item.Name===ev.field;
@@ -52,6 +63,31 @@ function GetModel(modelName) {
                     oField.getScripts().push(ev);
                 }
             });
+            //把表单相关的时间绑定到表单
+            model.getScripts().filter(ev=>{
+                return ev.field==='<FORM>';
+            }).forEach(ev=>{
+                model.setFormScript(ev);
+            });
+            //把网格相关的时间绑定到表单
+            model.getScripts().filter(ev=>{
+                return ev.field==='<GRID>';
+            }).forEach(ev=>{
+                model.setGridScript(ev);
+            });
+            //设置自动获得焦点的字段
+            if(!model.AutoFocusField){
+                model.setAutoFocusField(model.getFields()[0].Name);
+            }
+            var autoFocusField=model.getFields().find(field=>{
+                return field.Name===model.AutoFocusField;
+            });
+            if(!autoFocusField){
+                autoFocusField=model.getFields()[0];
+            }
+            if(autoFocusField){
+                autoFocusField.AutoFocus=true;
+            }
             return Promise.resolve(model);
         });
 }

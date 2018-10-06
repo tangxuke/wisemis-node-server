@@ -4,7 +4,8 @@ var Connection={
     port:62178,
     user:'root',
     password:'hlh***TXK0921',
-    database:'wisemis'
+    database:'wisemis',
+    connectTimeout:1*60*1000    //连接超时1分钟
 }
 
 module.exports=Connection;

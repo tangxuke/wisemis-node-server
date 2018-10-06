@@ -2,6 +2,7 @@ var Field=require('./field')
 var Relation=require('./relation')
 var Script=require('./script')
 var SetModelFromRow=require('./from-row')
+var Action=require('./operation');
 
 /**
  * 模型对象定义
@@ -97,6 +98,30 @@ function Model(){
         this.System=system;
         return this;
     }
+
+    /**自动获得焦点的字段 */
+    this.AutoFocusField='';
+    /**
+     * 设置自动获得焦点的字段
+     * @param {string} field 字段名称
+     * @returns {Model}
+     */
+    this.setAutoFocusField=function(field){
+        this.AutoFocusField=field;
+        return this;
+    }
+    /**自动刷新数据 */
+    this.AutoRefresh=false;
+    /**
+     * 设置自动刷新数据
+     * @param {boolean} value 自动刷新
+     * @returns {Model}
+     */
+    this.setAutoRefresh=function(value){
+        this.AutoRefresh=value;
+        return this;
+    }
+
     /**
      * 字段列表
      */
@@ -143,6 +168,18 @@ function Model(){
      */
     this.SetPropertyValue=function(proprety,value){
         this[proprety]=value;
+        return this;
+    }
+
+    /**分页列表 */
+    this.Pages='';
+    /**
+     * 设置分页列表
+     * @param {string} pages 页面列表
+     * @returns {Model} 
+     */
+    this.setPages=function(pages){
+        this.Pages=pages;
         return this;
     }
 
@@ -201,6 +238,63 @@ function Model(){
      */
     this.setModelFromRow=function(row){
         SetModelFromRow(this,row);
+        return this;
+    }
+
+    /**表单事件集合 */
+    this.FormScripts=[];
+    /**
+     * 添加表单事件
+     * @param {Script} script 事件脚本
+     * @returns {Model}
+     */
+    this.setFormScript=function(script){
+        this.FormScripts.push(script);
+        return this;
+    }
+    /**
+     * 获取表单事件列表
+     * @returns {Script[]}
+     */
+    this.getFormScript=function(){
+        return this.FormScripts;
+    }
+
+    /**网格事件集合 */
+    this.GridScripts=[];
+    /**
+     * 添加网格事件
+     * @param {Script} script 事件脚本
+     * @returns {Model}
+     */
+    this.setGridScript=function(script){
+        this.GridScripts.push(script);
+        return this;
+    }
+    /**
+     * 获取网格事件列表
+     * @returns {Script[]}
+     */
+    this.getGridScript=function(){
+        return this.GridScripts;
+    }
+
+    /**动作列表 */
+    this.Actions=[];
+    /**
+     * 获取动作列表
+     * @returns {Action[]}
+     */
+    this.getActions=function(){
+        return this.Actions;
+    }
+    /**
+     * 设置动作
+     * @param {Action} action 动作
+     * @returns {Model}
+     */
+    this.setAction=function(action){
+        this.Actions.push(action);
         return this;
     }
 }

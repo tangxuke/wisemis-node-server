@@ -22,6 +22,7 @@ router.post('/',function(req,res){
     mysql(sql,params,database)
     .then(value=>{
         console.log('OK');
+        console.log(value);
         res.json(response.success(value.results));
     })
     .catch(reason=>{

@@ -11,6 +11,8 @@ var updateFn=require('./update')
  */
 module.exports=function(model,data){
 
+    console.log(data);
+
     var fields=model.getFields().map(item=>{
         item.Value=data[item.Name];
         item.OldValue=data[item.Name+'_OldValue'];

@@ -3,8 +3,7 @@ var Field=require('..');
 /**
  * 从数据行创建字段
  * @param {Field} field 字段对象
- * @param {{field_name:string,field_title:string,field_type:string,field_length:number,grid_column_width:number,form_col_span:number,control_type:string,icon:string,is_insert:boolean,is_update:boolean,is_key:boolean,show_in_form:boolean,show_in_grid:boolean,orderid:number,select_options:string,reg_expression:string,system:boolean,default_value:string}} row 行数据
- * @returns {Field}
+ * @param {{field_name:string,field_title:string,field_type:string,field_length:number,grid_column_width:number,form_col_span:number,control_type:string,icon:string,is_insert:boolean,is_update:boolean,is_key:boolean,is_not_null:boolean,show_in_form:boolean,show_in_grid:boolean,orderid:number,reg_expression:string,system:boolean,default_value:string,tool_tip:string,page:string,data_source_type:string,data_source:string,data_source_sql_return_field:string,data_srouce_sql_database:string,control_height:number}} row 行数据
  */
 function SetField(field,row){
     field.setName(row.field_name)
@@ -21,22 +20,17 @@ function SetField(field,row){
     .setShowInGrid(row.show_in_grid)
     .setSystem(row.system)
     .setIsKey(row.is_key)
+    .setIsNotNull(row.is_not_null)
     .setOrderId(row.orderid)
     .setRegExpression(row.reg_expression)
+    .setToolTip(row.tool_tip)
+    .setPage(row.page)
+    .setDataSourceType(row.data_source_type)
+    .setDataSource(row.data_source)
+    .setDataSourceSQLReturnField(row.data_source_sql_return_field)
+    .setDataSourceSQLDatabase(row.data_srouce_sql_database)
+    .setControlHeight(row.control_height)
     .setDefaultValue(eval(row.default_value));    
-
-    if(row.select_options){
-        row.select_options.split(',').forEach(
-            item=>{
-                if(item.includes(':')){
-                    var s=item.split(':');
-                    field.setOption(s[0],s[1]);
-                }else{
-                    field.setOption(item,item);
-                }            
-            }
-        );
-    }
 }
 
 module.exports=SetField;

@@ -20,7 +20,7 @@ function AlterTable(model){
                 });
                 if(!found){
                     //模板定义的字段不存在，添加字段
-                    alterSQL+='\nalter table `'+model.TableName+'` add `'+item.Name+'` '+item.getSQLType()+' null;';
+                    alterSQL+='\nalter table `'+model.TableName+'` add `'+item.Name+'` '+item.getSQLType()+' null COMMENT '+`'${item.Title}';`;
                 }else{
                     //模板定义的字段已存在，比较字段类型
                 }
