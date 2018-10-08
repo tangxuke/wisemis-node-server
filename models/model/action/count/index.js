@@ -16,20 +16,8 @@ module.exports=function(model,data){
         });
         where.push(...where1);
     }
-        if(data.query && Object.keys(data.query).length>0){
-            var q=data.query;
-            var Query=require(`../../../business/${model.Name}/action/query`)();
-
-            var where2=Query.getFields().filter(item=>{
-                return Object.keys(q).findIndex(e=>{return item.Name===e && q[e]!=='<不限>';})>-1;
-            }).map(item=>{
-                item.Value=q[item.Name];
-                return item;
-            }).map(item=>{
-                return item.SearchExpr.replace(/\?/g,"'"+item.Value+"'");
-            });
-
-            where.push(...where2);   
+        if(data.query && Array.isArray(data.query)){
+            where.push(data.query);   
         }
 
         if(where.length>0){

@@ -88,6 +88,10 @@ function Field(){
      */
     this.SearchField=false;
     /**
+     * 查询表达式
+     */
+    this.SearchExpr='';
+    /**
      * 设置搜索字段
      * @param {boolean} value 是否搜索字段
      * @returns {Field}
