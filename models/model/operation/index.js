@@ -16,6 +16,18 @@ function Operation(){
         return this;
     }
 
+    /**动作说明 */
+    this.Remark='';
+    /**
+     * 设置动作说明
+     * @param {string} remark 动作说明
+     * @returns {Operation}
+     */
+    this.setRemark=function(remark){
+        this.Remark=remark;
+        return this;
+    }
+
     /**检查可用条件的代码 */
     this.CheckEnableCode='';
     /**
