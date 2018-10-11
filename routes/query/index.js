@@ -6,9 +6,8 @@ var response=require('../../utils/response')
 router.post('/',function(req,res){
     var sql=req.body.sql;
     var params=req.body.params;
-    var database=req.body.database;
 
-    if(!sql || !Array.isArray(params) || !database){
+    if(!sql){
         res.json(response.error('参数不足！'));
         return;
     }

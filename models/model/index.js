@@ -35,19 +35,6 @@ function Model(){
         return this;
     }
     /**
-     * 默认数据库
-     */
-    this.Database='demo';
-    /**
-     * 设置数据库
-     * @param {string} database 数据库
-     * @returns {Model}
-     */
-    this.setDatabase=function(database){
-        this.Database=database;
-        return this;
-    }
-    /**
      * 后台表
      */
     this.TableName='';
