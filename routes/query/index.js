@@ -7,12 +7,15 @@ router.post('/',function(req,res){
     var sql=req.body.sql;
     var params=req.body.params;
 
+    console.log(sql);
+    console.log(params);
+
     if(!sql){
         res.json(response.error('参数不足！'));
         return;
     }
 
-    mysql(sql,params,database)
+    mysql(sql,params)
     .then(value=>{
         res.json(response.success(value));
     })

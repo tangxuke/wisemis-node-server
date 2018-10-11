@@ -16,7 +16,7 @@ function login(req,res){
     username=username.split('@')[0];
 
     //获取客户信息
-    mysql(`select * from customer where name='${customer}'`,[],'wisemis')
+    mysql(`select * from customer where name='${customer}'`,[])
     
     .then(value=>{
         if(value.results.length!==1){
@@ -25,8 +25,7 @@ function login(req,res){
             });
         }
         var row=value.results[0];
-        req.session.database=row['database'];
-        return mysql(`select * from user where username='${username}'`,[],req.session.database);
+        return mysql(`select * from user where username='${username}'`,[]);
     })
     .then(value=>{
         if(value.results.length===1){
