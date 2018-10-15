@@ -9,9 +9,9 @@ var mysql_batch=require('../../../../utils/mysql-batch')
  */
 function AlterTable(model){
     return new Promise(function(resolve,reject){
-        var sql='select * from `COLUMNS` where `TABLE_NAME`=? order by ORDINAL_POSITION';
+        var sql='select * from `COLUMNS` where `TABLE_SCHEMA`=? and `TABLE_NAME`=? order by ORDINAL_POSITION';
         var alterSQL='';
-        mysql(sql,[model.TableName],'information_schema')
+        mysql(sql,['wisemis',model.TableName],'information_schema')
         .then(value=>{
             //从模板定义角度比较
             model.getFields().forEach(item=>{
@@ -37,7 +37,7 @@ function AlterTable(model){
             });
 
             if(alterSQL.length){
-                mysql_batch(alterSQL,[],model.Database)
+                mysql_batch(alterSQL,[])
                 .then(value1=>{
                     resolve(true);
                 })

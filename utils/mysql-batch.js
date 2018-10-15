@@ -1,5 +1,5 @@
 var mysql=require('mysql');
-var ConnectionObject=require('./connection-batch')
+var Connection=require('./connection-batch')
 
 var result={
     results:[],
@@ -15,8 +15,8 @@ var result={
 module.exports=function(sql,params,database){
     params = params || [];
     var p=new Promise(function(resolve,reject){
-
-        var connection=mysql.createConnection(ConnectionObject);
+        var conn=new Connection(database);
+        var connection=mysql.createConnection(conn);
         connection.query(sql,params,function(error,results,fields){
             if(error)
                 reject(error);

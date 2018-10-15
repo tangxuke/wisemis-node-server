@@ -22,9 +22,7 @@ function CreateTable(model){
         }
         sql+=fields+');';
 
-        console.log(sql);
-
-        mysql(sql,[],model.Database)
+        mysql(sql,[])
         .then(value=>{
             resolve(true);
         })

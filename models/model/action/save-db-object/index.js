@@ -11,10 +11,9 @@ var AlterTable=require('./alter-table')
 function SaveTable(model){
     return new Promise(function(resolve,reject){
         var tablename=model.TableName;
-        var database=model.Database;
         var fields=model.getFields();
 
-        var checkTableExists=mysql(`select * from TABLES where TABLE_SCHEMA='${database}' and TABLE_NAME='${tablename}'`,[],'information_schema');
+        var checkTableExists=mysql(`select * from TABLES where TABLE_SCHEMA='wisemis' and TABLE_NAME='${tablename}'`,[],'information_schema');
         checkTableExists.then(value=>{
             if(value.results.length==0){
                 //表不存在，需要建表

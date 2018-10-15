@@ -1,5 +1,5 @@
 var mysql=require('mysql');
-var ConnectionObject=require('./connection')
+var Connection=require('./connection')
 
 var result={
     results:[],
@@ -9,13 +9,14 @@ var result={
  * 
  * @param {string} sql SQL语句
  * @param {any[]} params 参数化查询的参数数组
+ * @param {string} database 数据库，可选
  * @returns {Promise<result>}
  */
-module.exports=function(sql,params){
+module.exports=function(sql,params,database){
     params = params || [];
     var p=new Promise(function(resolve,reject){
-
-        var connection=mysql.createConnection(ConnectionObject);
+        var conn=new Connection(database);
+        var connection=mysql.createConnection(conn);
         connection.query(sql,params,function(error,results,fields){
             if(error)
                 reject(error);
