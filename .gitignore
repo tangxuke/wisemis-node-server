@@ -22,3 +22,4 @@ yarn-error.log*
 public/dist
 test.js
 test.js
+package-lock.json
