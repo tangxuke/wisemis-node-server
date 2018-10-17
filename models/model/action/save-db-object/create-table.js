@@ -7,6 +7,9 @@ var mysql=require('../../../../utils/mysql')
  * @returns {Promise<boolean>}
  */
 function CreateTable(model){
+    /**
+     * TODO:自动加id列、创建时间、创建人、修改人、修改时间、日志列等系统预定义列
+     */
     return new Promise(function(resolve,reject){
         var sql='create table `'+model.TableName+'` (';
         var keys='';
