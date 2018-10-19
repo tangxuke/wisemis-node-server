@@ -1,5 +1,5 @@
 var Model = require('../..')
-var mysql=require('../../../../utils/mysql');
+var mysql = require('../../../../utils/mysql');
 
 /**
  * 删除数据
@@ -7,27 +7,27 @@ var mysql=require('../../../../utils/mysql');
  * @param {object} data 包含主键的数据对象
  * @returns {Promise}
  */
-module.exports=function(model,data){
-    var fields=model.getFields().map(item=>{
-        item.Value=data[item.Name];
+module.exports = function (model, data) {
+    var fields = model.getFields().map(item => {
+        item.Value = data[item.Name];
 
         return item;
     });
 
-    var keys=fields.filter(item=>{
+    var keys = fields.filter(item => {
         return item.IsKey;
     });
-    if(keys.length==0){
+    if (keys.length == 0) {
         return Promise.reject(new Error('没有设定主键字段！'));
     }
-    var keyValues=keys.map(item=>{
+    var keyValues = keys.map(item => {
         return item.Value;
     });
 
-    var where=keys.map(item=>{
-        return '`'+item.Name+'`=?';
+    var where = keys.map(item => {
+        return '`' + item.Name + '`=?';
     }).join(' and ');
 
-    var sql='delete from `'+model.TableName+'` where '+where;
-    return mysql(sql,keyValues,model.Database);
+    var sql = 'delete from `' + model.TableName + '` where ' + where;
+    return mysql(sql, keyValues);
 }
