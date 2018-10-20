@@ -13,7 +13,10 @@ var page={
 module.exports=function(model,data){
     console.log(data);
     return new Promise(function(resolve,reject){
-        var sql='select * from '+model.TableName;
+        var fields=model.getFields().map(item=>{
+            return (item.FieldExpr?item.FieldExpr+' as '+item.Name:item.Name);
+        }).join(',');
+        var sql='select '+fields+' from '+model.TableName;
         var values=[];
         var where=[];
         if(data.where){
@@ -23,7 +26,7 @@ module.exports=function(model,data){
             });
             where.push(...where1);
         }
-        if(data.query){
+        if(Array.isArray(data.query) && data.query.length>0){
             where.push(data.query);   
         }
         if(where.length>0){

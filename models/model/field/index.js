@@ -10,6 +10,10 @@ function Field(){
      */
     this.Name='';
     /**
+     * 字段表达式
+     */
+    this.FieldExpr='';
+    /**
      * 字段标题
      */
     this.Title='';
@@ -156,6 +160,15 @@ function Field(){
         this.Name=name;
         return this;
     };
+    /**
+     * 设置字段表达式
+     * @param {string} expr 字段表达式
+     * @returns {Field}
+     */
+    this.setFieldExpr=function(expr){
+        this.FieldExpr=expr;
+        return this;
+    },
     /**
      * 设置字段标题
      * @param {string} title 字段标题

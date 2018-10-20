@@ -16,8 +16,9 @@ module.exports=function(model,data){
         });
         where.push(...where1);
     }
-        if(data.query && Array.isArray(data.query)){
-            where.push(data.query);   
+        if(Array.isArray(data.query) && data.query.length>0){
+
+            where.push(data.query);
         }
 
         if(where.length>0){
