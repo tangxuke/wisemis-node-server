@@ -13,7 +13,9 @@ module.exports=function(model,data){
 
     console.log(data);
 
-    var fields=model.getFields().map(item=>{
+    var fields=model.getFields().filter(item=>{
+        return item.IsInsert || item.IsUpdate || item.IsKey;
+    }).map(item=>{
         item.Value=data[item.Name];
         item.OldValue=data[item.Name+'_OldValue'];
 
