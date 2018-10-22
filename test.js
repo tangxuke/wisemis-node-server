@@ -1,6 +1,5 @@
-var o={}
-o.a=function(){
-    alert('test');
-}.toString();
-
-console.log(JSON.stringify(o));
+var a='';
+if(a)
+    console.log('1');
+else
+    console.log('0');

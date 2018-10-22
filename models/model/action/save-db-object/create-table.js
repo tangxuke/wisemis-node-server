@@ -17,7 +17,7 @@ function CreateTable(model){
             if(field.IsKey){
                 keys+=',`'+field.Name+'`';
             }
-            return '`'+field.Name+'` '+field.getSQLType()+' null COMMENT '+`'${field.Title}'`;
+            return '`'+field.Name+'` '+field.getSQLType()+(field.IsNotNull?' not null':' null')+' COMMENT '+`'${field.Title}'`;
         }).join(',');
         if(keys.length>0){
             keys=keys.substr(1);
