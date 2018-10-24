@@ -8,15 +8,14 @@ var mysql = require('../../../../utils/mysql');
  * @returns {Promise}
  */
 module.exports = function (model, data) {
-    var fields = model.getFields().map(item => {
+    var keys = model.getFields().filter(item=>{
+        return item.IsKey;
+    }).map(item => {
         item.Value = data[item.Name];
 
         return item;
     });
 
-    var keys = fields.filter(item => {
-        return item.IsKey;
-    });
     if (keys.length == 0) {
         return Promise.reject(new Error('没有设定主键字段！'));
     }
