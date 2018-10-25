@@ -10,6 +10,7 @@ function Connection(database) {
         user: 'root',
         password: 'hlh***TXK0921',
         database: database || 'wisemis',
+        multipleStatements: true,
         connectTimeout: 1 * 60 * 1000    //连接超时1分钟
     }
 };

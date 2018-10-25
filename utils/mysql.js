@@ -8,12 +8,11 @@ var result={
 /**
  * 
  * @param {string} sql SQL语句
- * @param {any[]} params 参数化查询的参数数组
+ * @param {any[]} params 参数化查询的参数数组 | 对象 | 值
  * @param {string} database 数据库，可选
  * @returns {Promise<result>}
  */
 module.exports=function(sql,params,database){
-    params = params || [];
     var p=new Promise(function(resolve,reject){
         var conn=new Connection(database);
         var connection=mysql.createConnection(conn);
@@ -23,9 +22,12 @@ module.exports=function(sql,params,database){
             else{
 
                 var bitFields=[];
+                
                 if(Array.isArray(fields)){
                     bitFields=fields.filter(field=>{
-                    return field.type===16;
+                        if(field === undefined)
+                            return false;
+                        return field.type===16;
                     });
                 }
                 
