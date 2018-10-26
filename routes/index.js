@@ -5,7 +5,7 @@ var users = require('./users')
 var menus = require('./menus')
 var models = require('./models')
 var query = require('./query')
-var upload = require('./upload');
+var upload = require('./import');
 
 //用户相关路由
 router.use('/users', users)
@@ -19,8 +19,8 @@ router.use('/models', models)
 //查询数据相关路由
 router.use('/query', query);
 
-//上传文件相关路由
-router.use('/upload', upload);
+//导入Excel相关路由
+router.use('/import', upload);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
