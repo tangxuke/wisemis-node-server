@@ -119,6 +119,34 @@ function Field() {
     }
 
     /**
+     * 网格列Render函数代码
+     */
+    this.GridRenderCode='';
+    /**
+     * 设置网格列render函数代码，默认参数h,{row,column,index}
+     * @param {string} code 函数代码
+     * @returns {Field}
+     */
+    this.setGridRenderCode=function(code){
+        this.GridRenderCode=code;
+        return this;
+    }
+
+    /**
+     * 网格列标题render函数代码
+     */
+    this.GridHeaderRenderCode='';
+    /**
+     * 设置网格列标题render函数代码
+     * @param {string} code 函数代码
+     * @returns {Field}
+     */
+    this.setGridHeaderRenderCode=function(code){
+        this.GridHeaderRenderCode=code;
+        return this;
+    }
+
+    /**
      * 检查值是否更改
      */
     this.CheckIsChanged = function() {
@@ -172,7 +200,7 @@ function Field() {
     this.setName = function(name) {
         this.Name = name;
         return this;
-    };
+    }
     /**
      * 设置字段表达式
      * @param {string} expr 字段表达式
@@ -181,7 +209,7 @@ function Field() {
     this.setFieldExpr = function(expr) {
             this.FieldExpr = expr;
             return this;
-        },
+        }
         /**
          * 设置字段标题
          * @param {string} title 字段标题
