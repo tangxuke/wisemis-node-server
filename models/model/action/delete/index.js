@@ -28,5 +28,6 @@ module.exports = function (model, data) {
     }).join(' and ');
 
     var sql = 'delete from `' + model.TableName + '` where ' + where;
+    console.log(sql);
     return mysql(sql, keyValues);
 }

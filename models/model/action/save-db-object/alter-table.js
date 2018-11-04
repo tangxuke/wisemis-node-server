@@ -26,7 +26,7 @@ function AlterTable(model) {
                             model.TableName + '` add `' +
                             item.Name + '` ' +
                             item.getSQLType() +
-                            item.IsId ? ' AUTO_INCREMENT' : '' +
+                            (item.IsId ? ' AUTO_INCREMENT' : '') +
                             (item.IsNotNull ? ' not null' : ' null') +
                             ' COMMENT ' + `'${item.Title}';`;
                     } else {
@@ -45,7 +45,7 @@ function AlterTable(model) {
                 });
 
                 if (alterSQL.length) {
-                    mysql_batch(alterSQL, [])
+                    mysql(alterSQL, [])
                         .then(value1 => {
                             resolve(true);
                         })

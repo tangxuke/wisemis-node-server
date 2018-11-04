@@ -304,13 +304,58 @@ function Field() {
         return this;
     }
 
+    /**可视表达式 */
+    this.VisibleExpression='';
+    /**
+     * 设置可视表达式
+     * @param {string} expr 可视表达式
+     * @returns {Field}
+     */
+    this.setVisibleExpression=function(expr){
+        this.VisibleExpression=expr;
+        return this;
+    }
+
+    /**可用表达式 */
+    this.EnableExpression='';
+    /**
+     * 设置可用表达式
+     * @param {string} expr 可用表达式
+     * @returns {Field}
+     */
+    this.setEnableExpression=function(expr){
+        this.EnableExpression=expr;
+        return this;
+    }
+
     /**
      * 设置默认值
-     * @param {any} value
+     * @param {string} value
      * @returns {Field}
      */
     this.setDefaultValue = function(value) {
-        this.DefaultValue = value;
+        if(typeof value !== 'string'){
+            switch(this.Type){
+                case 'string':
+                    this.DefaultValue='';
+                    break;
+                case 'number':
+                    this.DefaultValue=0;
+                    break;
+                case 'boolean':
+                    this.DefaultValue=false;
+                    break;
+                case 'date':
+                case 'time':
+                    this.DefaultValue=new Date();
+                    break;
+                default:
+                    this.DefaultValue=null;
+            }
+        }else{
+            this.DefaultValue = eval(value);
+        }
+        
         return this;
     }
 

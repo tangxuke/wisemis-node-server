@@ -13,6 +13,7 @@ var result={
  * @returns {Promise<result>}
  */
 module.exports=function(sql,params,database){
+    
     params = params || [];
     var p=new Promise(function(resolve,reject){
         var conn=new Connection(database);

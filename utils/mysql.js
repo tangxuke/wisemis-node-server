@@ -13,6 +13,9 @@ var result={
  * @returns {Promise<result>}
  */
 module.exports=function(sql,params,database){
+    console.log(sql);
+    console.log(params);
+    
     var p=new Promise(function(resolve,reject){
         var conn=new Connection(database);
         var connection=mysql.createConnection(conn);
