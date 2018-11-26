@@ -28,6 +28,7 @@ module.exports=function(model,data){
         }
 
     return new Promise(function(resolve,reject){
+
         mysql(sql,values,model.Database)
         .then(value=>{
             resolve(value.results[0].Count);
