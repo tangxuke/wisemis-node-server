@@ -15,4 +15,15 @@ router.get('/list',function(req,res){
     });
 });
 
+router.get('/all',function(req,res){
+    var sql=`select * from department order by parentid,name`;
+    mysql(sql)
+    .then(value=>{
+        res.json(response.success(value.results));
+    })
+    .catch(reason=>{
+        res.json(response.error(reason.message));
+    });
+});
+
 module.exports=router;
